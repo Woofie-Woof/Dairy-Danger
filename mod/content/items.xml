@@ -1,0 +1,3 @@
+<items gfxroot="gfx/items/" version="1">
+	<passive description="You feel relieved" gfx="probiotic-yogurt.png" name="Probiotic Yogurt" quality="1" />
+</items>

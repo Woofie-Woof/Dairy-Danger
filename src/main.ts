@@ -1,17 +1,17 @@
+import * as roomClear from "./callbacks/roomClear";
+
 const MOD_NAME = "Dairy-Danger";
 
 export function main(): void {
   // Instantiate a new mod object, which grants the ability to add callback functions that
   // correspond to in-game events
-  const mod = RegisterMod(MOD_NAME, 1);
-
-  // Set a callback function that corresponds to when a new run is started
-  mod.AddCallback(ModCallbacks.MC_POST_GAME_STARTED, postGameStarted);
+  const dairyDanger = RegisterMod(MOD_NAME, 1);
 
   // Print an initialization message to the "log.txt" file
   Isaac.DebugString(`${MOD_NAME} initialized.`);
-}
 
-function postGameStarted() {
-  Isaac.DebugString("Callback triggered: MC_POST_GAME_STARTED");
+  dairyDanger.AddCallback(
+    ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD,
+    roomClear.main,
+  );
 }
