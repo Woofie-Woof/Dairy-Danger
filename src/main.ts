@@ -1,3 +1,7 @@
+import * as evaluateCache from "./callbacks/evaluateCache";
+import * as postEffectRender from "./callbacks/postEffectRender";
+import * as postTearUpdate from "./callbacks/postTearUpdate";
+import * as preTearCollision from "./callbacks/preTearCollision";
 import * as roomClear from "./callbacks/roomClear";
 
 const MOD_NAME = "Dairy-Danger";
@@ -14,4 +18,19 @@ export function main(): void {
     ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD,
     roomClear.main,
   );
+
+  dairyDanger.AddCallback(
+    ModCallbacks.MC_POST_TEAR_UPDATE,
+    postTearUpdate.main,
+  );
+  dairyDanger.AddCallback(ModCallbacks.MC_EVALUATE_CACHE, evaluateCache.main);
+  dairyDanger.AddCallback(
+    ModCallbacks.MC_PRE_TEAR_COLLISION,
+    preTearCollision.main,
+  );
+  dairyDanger.AddCallback(
+    ModCallbacks.MC_POST_EFFECT_RENDER,
+    postEffectRender.main,
+  );
+  // dairyDanger.AddCallback(ModCallbacks.MC_POST_UPDATE, postUpdate.main);
 }

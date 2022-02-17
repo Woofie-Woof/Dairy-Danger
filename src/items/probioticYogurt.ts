@@ -1,6 +1,16 @@
+import { spawnGridEntityWithVariant } from "isaacscript-common";
 import { CollectibleTypeCustom } from "../constants";
 
-export function checkProbioticYogurt(): void {
+if (EID !== undefined) {
+  const itemDescription =
+    "Spawns poop when you clear a room#Poop type depends on room cleared:#{{Room}}: Normal#{{Shop}}: Golden#{{AngelRoom}}: Holy#{{DevilRoom}}/{{CursedRoom}}: Black#{{BossRoom}}: Rainbow";
+  EID.addCollectible(
+    CollectibleTypeCustom.COLLECTIBLE_PROBIOTIC_YOGURT,
+    itemDescription,
+  );
+}
+
+export function checkHasItem(): void {
   const game = Game();
   const numPlayers = game.GetNumPlayers();
   for (let i = 0; i < numPlayers; i++) {
@@ -9,37 +19,36 @@ export function checkProbioticYogurt(): void {
       player !== undefined &&
       player.HasCollectible(CollectibleTypeCustom.COLLECTIBLE_PROBIOTIC_YOGURT)
     ) {
-      applyProbioticYogurt(player);
+      applyEffect(player);
     }
   }
 }
 
-function applyProbioticYogurt(player: EntityPlayer) {
+function applyEffect(player: EntityPlayer) {
+  const game = Game();
+  const room = game.GetRoom();
   const playerPos = player.Position;
 
-  const rand = math.random(100);
+  const entityTypes: Map<RoomType, number> = new Map<RoomType, number>([
+    [RoomType.ROOM_CURSE, PoopGridEntityVariant.BLACK],
+    [RoomType.ROOM_DEVIL, PoopGridEntityVariant.BLACK],
+    [RoomType.ROOM_BOSS, PoopGridEntityVariant.RAINBOW],
+    [RoomType.ROOM_ANGEL, PoopGridEntityVariant.WHITE],
+    [RoomType.ROOM_SHOP, PoopGridEntityVariant.GOLDEN],
+  ]);
 
-  const entityTypes = [
-    { entityType: EntityType.ENTITY_POOP, variant: 0 },
-    { entityType: EntityType.ENTITY_POOP, variant: 1 },
-  ];
+  const roomType = room.GetType();
+  let poopVariant = entityTypes.get(roomType);
 
-  let chosenEffect = null;
-  if (rand <= 80) {
-    chosenEffect = entityTypes[0];
-  } else if (rand <= 90) {
-    chosenEffect = entityTypes[1];
+  if (poopVariant === undefined) {
+    poopVariant = PoopGridEntityVariant.NORMAL;
   }
 
-  if (chosenEffect !== null) {
-    Isaac.Spawn(
-      chosenEffect.entityType,
-      chosenEffect.variant,
-      0,
-      playerPos,
-      Vector.Zero,
-      player,
-    );
-    SFXManager().Play(SoundEffect.SOUND_FART);
-  }
+  spawnGridEntityWithVariant(
+    GridEntityType.GRID_POOP,
+    poopVariant,
+    room.GetGridIndex(playerPos),
+  );
+
+  SFXManager().Play(SoundEffect.SOUND_FART);
 }
