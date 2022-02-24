@@ -14,5 +14,8 @@ export function main(player: EntityPlayer, cacheFlag: CacheFlag): void {
       );
       player.MaxFireDelay -= bonus;
     }
+
+    player.MaxFireDelay +=
+      2 * player.GetCollectibleNum(CollectibleTypeCustom.COLLECTIBLE_BOBS_TEA);
   }
 }
