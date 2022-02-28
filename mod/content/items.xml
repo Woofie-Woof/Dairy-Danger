@@ -2,4 +2,5 @@
 	<passive description="You feel relieved" gfx="collectibles_probioticyogurt.png" name="Probiotic Yogurt" quality="1" />
 	<passive cache="firedelay" description="Tears up + ice cream shots" gfx="collectibles_droppedicecream.png" name="Dropped Ice Cream" quality="3" />
 	<passive cache="firedelay" description="Ipecac-flavored pearl tears!" gfx="collectibles_bobstea.png" name="Bob's Tea" quality="4" />
+	<passive description="Revenge is sweet" gfx="collectibles_darkchocolate" name="Dark Chocolate" quality="3" />
 </items>
