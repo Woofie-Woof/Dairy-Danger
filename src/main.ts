@@ -1,6 +1,7 @@
 import * as evaluateCache from "./callbacks/evaluateCache";
 import * as postEffectRender from "./callbacks/postEffectRender";
 import * as postTearUpdate from "./callbacks/postTearUpdate";
+import * as postUpdate from "./callbacks/postUpdate";
 import * as preTearCollision from "./callbacks/preTearCollision";
 import * as roomClear from "./callbacks/roomClear";
 
@@ -32,5 +33,6 @@ export function main(): void {
     ModCallbacks.MC_POST_EFFECT_RENDER,
     postEffectRender.main,
   );
-  // dairyDanger.AddCallback(ModCallbacks.MC_POST_UPDATE, postUpdate.main);
+  // dairyDanger.AddCallback(ModCallbacks.MC_INPUT_ACTION, inputAction.main);
+  dairyDanger.AddCallback(ModCallbacks.MC_POST_UPDATE, postUpdate.main);
 }

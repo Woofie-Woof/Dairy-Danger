@@ -1,23 +1,13 @@
-export function main(): void {
-  const activeBrownCreep = Isaac.FindByType(
-    EntityType.ENTITY_EFFECT,
-    EffectVariant.CREEP_SLIPPERY_BROWN,
-  );
+import * as bobsTea from "../items/bobsTea";
 
-  for (const creep of activeBrownCreep) {
-    const creepData = creep.GetData();
-    if (
-      creepData.iceCream !== undefined &&
-      creepData.iceCream === true &&
-      typeof creepData.iceCreamR === "number" &&
-      typeof creepData.iceCreamG === "number" &&
-      typeof creepData.iceCreamB === "number"
-    ) {
-      creep.SetColor(
-        Color(creepData.iceCreamR, creepData.iceCreamG, creepData.iceCreamB),
-        0,
-        1,
-      );
+export function main(): void {
+  const game = Game();
+  const numPlayers = game.GetNumPlayers();
+  for (let i = 0; i < numPlayers; i++) {
+    const player = Isaac.GetPlayer(i);
+
+    if (player !== undefined) {
+      bobsTea.checkHasItem(player);
     }
   }
 }
