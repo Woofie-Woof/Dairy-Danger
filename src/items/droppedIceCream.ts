@@ -11,19 +11,22 @@ if (EID !== undefined) {
 
 export function checkHasItem(tear: EntityTear, player: EntityPlayer): void {
   const tearData = tear.GetData();
+  const rng = RNG();
+  rng.SetSeed(Random(), 1);
+
   if (
     tearData.iceCream === undefined &&
     player !== undefined &&
     player.HasCollectible(
       CollectibleTypeCustom.COLLECTIBLE_DROPPED_ICE_CREAM,
     ) &&
-    math.random(100) <= 10
+    rng.RandomInt(101) <= 10
   ) {
-    applyEffect(tear, player);
+    applyEffect(tear, player, rng);
   }
 }
 
-function applyEffect(tear: EntityTear, player: EntityPlayer) {
+function applyEffect(tear: EntityTear, player: EntityPlayer, rng: RNG) {
   const firedTear = player.FireTear(
     player.Position,
     tear.Velocity,
@@ -43,6 +46,6 @@ function applyEffect(tear: EntityTear, player: EntityPlayer) {
 
     const tearData = firedTear.GetData();
     tearData.iceCream = true;
-    firedTear.SetColor(colors[math.random(3) - 1], 0, 1);
+    firedTear.SetColor(colors[rng.RandomInt(4) - 1], 0, 1);
   }
 }

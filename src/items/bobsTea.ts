@@ -140,9 +140,12 @@ export function fireIpecacTears(
       break;
   }
 
+  const rng = RNG();
+  rng.SetSeed(Random(), 1);
+
   let firedTear = player.FireTear(
     player.Position,
-    Vector(x + 2 * math.random(), y + 2 * math.random()),
+    Vector(x + 2 * rng.RandomFloat(), y + 2 * rng.RandomFloat()),
     false,
     false,
     false,
@@ -156,7 +159,7 @@ export function fireIpecacTears(
 
   firedTear = player.FireTear(
     player.Position,
-    Vector(x + 2 * math.random(), y + 2 * math.random()),
+    Vector(x + 2 * rng.RandomFloat(), y + 2 * rng.RandomFloat()),
     false,
     false,
     false,
@@ -170,7 +173,7 @@ export function fireIpecacTears(
 
   firedTear = player.FireTear(
     player.Position,
-    Vector(x + 2 * math.random(), y + 2 * math.random()),
+    Vector(x + 2 * rng.RandomFloat(), y + 2 * rng.RandomFloat()),
     false,
     false,
     false,
@@ -184,7 +187,7 @@ export function fireIpecacTears(
 
   firedTear = player.FireTear(
     player.Position,
-    Vector(x + 2 * math.random(), y + 2 * math.random()),
+    Vector(x + 2 * rng.RandomFloat(), y + 2 * rng.RandomFloat()),
     false,
     false,
     false,
@@ -198,7 +201,7 @@ export function fireIpecacTears(
 
   firedTear = player.FireTear(
     player.Position,
-    Vector(x + 2 * math.random(), y + 2 * math.random()),
+    Vector(x + 2 * rng.RandomFloat(), y + 2 * rng.RandomFloat()),
     false,
     false,
     false,
@@ -212,7 +215,7 @@ export function fireIpecacTears(
 
   firedTear = player.FireTear(
     player.Position,
-    Vector(x + 2 * math.random(), y + 2 * math.random()),
+    Vector(x + 2 * rng.RandomFloat(), y + 2 * rng.RandomFloat()),
     false,
     false,
     false,
