@@ -3,7 +3,7 @@ import { CollectibleTypeCustom } from "../constants";
 
 if (EID !== undefined) {
   const itemDescription =
-    "↓ -0.55 Tears down#Shooting continuously gradually increases your fire rate by up to 250%#At max fire rate, double tap a direction to shoot a cluster of Ipecac tears that deal 3x your damage and reset your fire rate";
+    "↓ 0.8x Tears #Shooting continuously gradually increases your fire rate by up to 250%#At max fire rate, double tap a direction to shoot a cluster of Ipecac tears that deal 3x your damage and reset your fire rate";
   EID.addCollectible(
     CollectibleTypeCustom.COLLECTIBLE_BOBS_TEA,
     itemDescription,
@@ -22,7 +22,7 @@ export function applyEffect(player: EntityPlayer): void {
   const frameCount = game.GetFrameCount();
 
   if (playerData.currentBobsTeaBonus === undefined)
-    playerData.currentBobsTeaBonus = 0;
+    playerData.currentBobsTeaBonus = -0.2;
 
   playerData.currentStartDirection = -1;
   if (
@@ -62,12 +62,12 @@ export function applyEffect(player: EntityPlayer): void {
     ) {
       fireIpecacTears(player, playerData);
 
-      playerData.currentBobsTeaBonus = 0;
+      playerData.currentBobsTeaBonus = -0.2;
       player.AddCacheFlags(CacheFlag.CACHE_FIREDELAY);
       player.EvaluateItems();
     }
 
-    if (playerData.currentBobsTeaBonus === 0)
+    if (playerData.currentBobsTeaBonus === -0.2)
       playerData.startShoot = frameCount;
 
     playerData.lastStartPress = frameCount;
@@ -100,7 +100,7 @@ export function applyEffect(player: EntityPlayer): void {
     playerData.lastShootFrame !== undefined
   ) {
     if (frameCount - Number(playerData.lastShootFrame) >= 30) {
-      playerData.currentBobsTeaBonus = 0;
+      playerData.currentBobsTeaBonus = -0.2;
       playerData.startShoot = frameCount;
       player.AddCacheFlags(CacheFlag.CACHE_FIREDELAY);
       player.EvaluateItems();

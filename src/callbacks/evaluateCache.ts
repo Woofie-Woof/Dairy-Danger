@@ -15,9 +15,13 @@ export function main(player: EntityPlayer, cacheFlag: CacheFlag): void {
       player.MaxFireDelay -= bonus;
     }
 
-    if (player.HasCollectible(CollectibleTypeCustom.COLLECTIBLE_BOBS_TEA))
-      player.MaxFireDelay += 2.8;
     const playerData = player.GetData();
+    if (
+      player.HasCollectible(CollectibleTypeCustom.COLLECTIBLE_BOBS_TEA) &&
+      playerData.currentBobsTeaBonus === undefined
+    )
+      playerData.currentBobsTeaBonus = -0.2;
+
     if (playerData.currentBobsTeaBonus !== undefined)
       player.MaxFireDelay /= 1 + Number(playerData.currentBobsTeaBonus);
   }

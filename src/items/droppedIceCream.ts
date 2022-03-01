@@ -46,6 +46,7 @@ function applyEffect(tear: EntityTear, player: EntityPlayer, rng: RNG) {
 
     const tearData = firedTear.GetData();
     tearData.iceCream = true;
-    firedTear.SetColor(colors[rng.RandomInt(4) - 1], 0, 1);
+    const colorIndex = rng.RandomInt(3);
+    firedTear.SetColor(colors[colorIndex], 0, 1);
   }
 }
