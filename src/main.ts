@@ -2,6 +2,7 @@ import { ModCallbacksCustom, upgradeMod } from "isaacscript-common";
 import * as evaluateCache from "./callbacks/evaluateCache";
 import * as postEffectRender from "./callbacks/postEffectRender";
 import * as postItemPickup from "./callbacks/postItemPickup";
+import * as postLaserUpdate from "./callbacks/postLaserUpdate";
 import * as postPickupInit from "./callbacks/postPickupInit";
 import * as postPlayerChangeHealth from "./callbacks/postPlayerChangeHealth";
 import * as postTearUpdate from "./callbacks/postTearUpdate";
@@ -28,6 +29,12 @@ export function main(): void {
   dairyDanger.AddCallback(
     ModCallbacks.MC_POST_TEAR_UPDATE,
     postTearUpdate.main,
+  );
+
+  // Laser update
+  dairyDanger.AddCallback(
+    ModCallbacks.MC_POST_LASER_UPDATE,
+    postLaserUpdate.main,
   );
 
   // Evaluate cache

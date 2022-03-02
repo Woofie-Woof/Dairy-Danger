@@ -25,14 +25,21 @@ export function applyEffect(player: EntityPlayer) {
 
 export function changeHearts(pickup: EntityPickup) {
   if (pickup.SubType !== HeartSubType.HEART_BLACK) {
-    Isaac.Spawn(
+    const spawnedBlackHeart = Isaac.Spawn(
       EntityType.ENTITY_PICKUP,
       PickupVariant.PICKUP_HEART,
       HeartSubType.HEART_BLACK,
       pickup.Position,
       Vector.Zero,
       undefined,
-    );
+    ).ToPickup();
+
+    if (pickup.IsShopItem() && spawnedBlackHeart !== undefined) {
+      spawnedBlackHeart.ClearEntityFlags(EntityFlag.FLAG_APPEAR);
+      spawnedBlackHeart.Price = pickup.Price;
+      spawnedBlackHeart.ShopItemId = pickup.ShopItemId;
+    }
+
     pickup.Remove();
   }
 }

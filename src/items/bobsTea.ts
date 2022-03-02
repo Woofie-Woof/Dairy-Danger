@@ -1,5 +1,5 @@
 import { round } from "isaacscript-common";
-import { CollectibleTypeCustom } from "../constants";
+import { CollectibleTypeCustom, MAX_BOBS_TEA_BONUS } from "../constants";
 
 if (EID !== undefined) {
   const itemDescription =
@@ -22,7 +22,7 @@ export function applyEffect(player: EntityPlayer): void {
   const frameCount = game.GetFrameCount();
 
   if (playerData.currentBobsTeaBonus === undefined)
-    playerData.currentBobsTeaBonus = -0.2;
+    playerData.currentBobsTeaBonus = 0;
 
   playerData.currentStartDirection = -1;
   if (
@@ -56,18 +56,18 @@ export function applyEffect(player: EntityPlayer): void {
 
   if (playerData.currentStartDirection !== -1) {
     if (
-      Number(playerData.currentBobsTeaBonus) === 2.0 &&
+      Number(playerData.currentBobsTeaBonus) === MAX_BOBS_TEA_BONUS &&
       playerData.currentStartDirection === playerData.lastStartDirection &&
       frameCount - Number(playerData.lastStartPress) <= 20
     ) {
       fireIpecacTears(player, playerData);
 
-      playerData.currentBobsTeaBonus = -0.2;
+      playerData.currentBobsTeaBonus = 0;
       player.AddCacheFlags(CacheFlag.CACHE_FIREDELAY);
       player.EvaluateItems();
     }
 
-    if (playerData.currentBobsTeaBonus === -0.2)
+    if (playerData.currentBobsTeaBonus === 0)
       playerData.startShoot = frameCount;
 
     playerData.lastStartPress = frameCount;
@@ -100,16 +100,17 @@ export function applyEffect(player: EntityPlayer): void {
     playerData.lastShootFrame !== undefined
   ) {
     if (frameCount - Number(playerData.lastShootFrame) >= 30) {
-      playerData.currentBobsTeaBonus = -0.2;
+      playerData.currentBobsTeaBonus = 0;
       playerData.startShoot = frameCount;
       player.AddCacheFlags(CacheFlag.CACHE_FIREDELAY);
       player.EvaluateItems();
-    } else if (Number(playerData.currentBobsTeaBonus) < 2.0) {
+    } else if (Number(playerData.currentBobsTeaBonus) < MAX_BOBS_TEA_BONUS) {
       const previousBonus = playerData.currentBobsTeaBonus;
       playerData.currentBobsTeaBonus =
-        round(((frameCount - Number(playerData.startShoot)) / 60) * 2) / 2;
+        round(((frameCount - Number(playerData.startShoot)) / 90) * 2) / 2;
 
       if (previousBonus !== playerData.currentBobsTeaBonus) {
+        Isaac.DebugString(`Current bonus: ${playerData.currentBobsTeaBonus}`);
         player.AddCacheFlags(CacheFlag.CACHE_FIREDELAY);
         player.EvaluateItems();
       }

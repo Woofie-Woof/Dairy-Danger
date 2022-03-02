@@ -9,7 +9,7 @@ if (EID !== undefined) {
   );
 }
 
-export function checkHasItem(tear: EntityTear, player: EntityPlayer): void {
+export function checkHasItem(tear: Entity, player: EntityPlayer): void {
   const tearData = tear.GetData();
   const rng = RNG();
   rng.SetSeed(Random(), 1);
@@ -26,10 +26,13 @@ export function checkHasItem(tear: EntityTear, player: EntityPlayer): void {
   }
 }
 
-function applyEffect(tear: EntityTear, player: EntityPlayer, rng: RNG) {
+function applyEffect(tear: Entity, player: EntityPlayer, rng: RNG) {
+  let velocity = tear.Velocity;
+  if (tear.Type === EntityType.ENTITY_LASER)
+    velocity = player.GetShootingInput().mul(player.ShotSpeed * 10);
   const firedTear = player.FireTear(
     player.Position,
-    tear.Velocity,
+    velocity,
     false,
     false,
     false,
