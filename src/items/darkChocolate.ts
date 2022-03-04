@@ -1,5 +1,18 @@
 import { HealthType } from "isaacscript-common";
-import { CollectibleTypeCustom } from "../constants";
+import { CollectibleTypeCustom, HeartSubTypeCustom } from "../constants";
+
+const HeartConversions = new Map<HeartSubType, number>([
+  [HeartSubType.HEART_FULL, HeartSubType.HEART_BLACK],
+  [HeartSubType.HEART_ROTTEN, HeartSubType.HEART_BLACK],
+  [HeartSubType.HEART_SOUL, HeartSubType.HEART_BLACK],
+  [HeartSubType.HEART_SCARED, HeartSubType.HEART_BLACK],
+  [HeartSubType.HEART_DOUBLEPACK, HeartSubType.HEART_BLACK],
+  [HeartSubType.HEART_BLENDED, HeartSubType.HEART_BLACK],
+  [HeartSubType.HEART_BONE, HeartSubTypeCustom.HALF_BLACK],
+  [HeartSubType.HEART_ETERNAL, HeartSubTypeCustom.HALF_BLACK],
+  [HeartSubType.HEART_HALF, HeartSubTypeCustom.HALF_BLACK],
+  [HeartSubType.HEART_HALF_SOUL, HeartSubTypeCustom.HALF_BLACK],
+]);
 
 export function checkHasItem(pickup: EntityPickup) {
   const game = Game();
@@ -24,11 +37,18 @@ export function applyEffect(player: EntityPlayer) {
 }
 
 export function changeHearts(pickup: EntityPickup) {
-  if (pickup.SubType !== HeartSubType.HEART_BLACK) {
+  if (
+    pickup.SubType !== HeartSubType.HEART_BLACK &&
+    pickup.SubType !== HeartSubTypeCustom.HALF_BLACK
+  ) {
+    let convertedType = HeartConversions.get(pickup.SubType);
+
+    if (convertedType === undefined) convertedType = pickup.SubType;
+
     const spawnedBlackHeart = Isaac.Spawn(
       EntityType.ENTITY_PICKUP,
       PickupVariant.PICKUP_HEART,
-      HeartSubType.HEART_BLACK,
+      convertedType,
       pickup.Position,
       Vector.Zero,
       undefined,

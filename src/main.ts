@@ -4,9 +4,11 @@ import * as postEffectRender from "./callbacks/postEffectRender";
 import * as postItemPickup from "./callbacks/postItemPickup";
 import * as postLaserUpdate from "./callbacks/postLaserUpdate";
 import * as postPickupInit from "./callbacks/postPickupInit";
+import * as postPickupRender from "./callbacks/postPickupRender";
 import * as postPlayerChangeHealth from "./callbacks/postPlayerChangeHealth";
 import * as postTearUpdate from "./callbacks/postTearUpdate";
 import * as postUpdate from "./callbacks/postUpdate";
+import * as prePickupCollision from "./callbacks/prePickupCollision";
 import * as preTearCollision from "./callbacks/preTearCollision";
 import * as roomClear from "./callbacks/roomClear";
 import { CollectibleTypeCustom } from "./constants";
@@ -59,6 +61,20 @@ export function main(): void {
   dairyDanger.AddCallback(
     ModCallbacks.MC_POST_PICKUP_INIT,
     postPickupInit.main,
+  );
+
+  // Pre pickup collision for hearts
+  dairyDanger.AddCallback(
+    ModCallbacks.MC_PRE_PICKUP_COLLISION,
+    prePickupCollision.main,
+    PickupVariant.PICKUP_HEART,
+  );
+
+  // Post pickup render for hearts
+  dairyDanger.AddCallback(
+    ModCallbacks.MC_POST_PICKUP_RENDER,
+    postPickupRender.main,
+    PickupVariant.PICKUP_HEART,
   );
 
   // Post item pickup

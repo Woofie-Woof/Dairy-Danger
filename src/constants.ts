@@ -5,4 +5,12 @@ export enum CollectibleTypeCustom {
   COLLECTIBLE_DARK_CHOCOLATE = Isaac.GetItemIdByName("Dark Chocolate"),
 }
 
-export const MAX_BOBS_TEA_BONUS = 2.0;
+export enum TrinketTypeCustom {
+  TRINKET_LACTOSE_INTOLERANCE = Isaac.GetTrinketIdByName("Lactose Intolerance"),
+}
+
+export enum HeartSubTypeCustom {
+  HALF_BLACK = 1422,
+}
+
+export const MAX_BOBS_TEA_BONUS = 1.5;
