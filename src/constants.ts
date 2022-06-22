@@ -14,3 +14,21 @@ export enum HeartSubTypeCustom {
 }
 
 export const MAX_BOBS_TEA_BONUS = 1.5;
+
+export const MILK_ITEM_IDS = [
+  CollectibleType.COLLECTIBLE_MILK,
+  CollectibleType.COLLECTIBLE_SOY_MILK,
+  CollectibleType.COLLECTIBLE_ALMOND_MILK,
+  CollectibleType.COLLECTIBLE_CHOCOLATE_MILK,
+  CollectibleType.COLLECTIBLE_BREAKFAST,
+  CollectibleType.COLLECTIBLE_CRACK_JACKS,
+  CollectibleTypeCustom.COLLECTIBLE_PROBIOTIC_YOGURT,
+  CollectibleTypeCustom.COLLECTIBLE_DROPPED_ICE_CREAM,
+  CollectibleTypeCustom.COLLECTIBLE_BOBS_TEA,
+  CollectibleTypeCustom.COLLECTIBLE_DARK_CHOCOLATE,
+];
+
+export const MILK_TRINKET_IDS = [
+  TrinketType.TRINKET_BUTTER,
+  TrinketType.TRINKET_WALNUT,
+];

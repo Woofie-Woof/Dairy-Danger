@@ -1,4 +1,5 @@
 import * as bobsTea from "../items/bobsTea";
+import * as lactoseIntolerance from "../trinkets/lactoseIntolerance";
 
 export function main(): void {
   const game = Game();
@@ -8,6 +9,7 @@ export function main(): void {
 
     if (player !== undefined) {
       bobsTea.checkHasItem(player);
+      lactoseIntolerance.checkHasTrinket(player);
     }
   }
 }

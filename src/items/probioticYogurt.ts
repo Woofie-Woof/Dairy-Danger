@@ -1,4 +1,4 @@
-import { spawnGridEntityWithVariant } from "isaacscript-common";
+import { spawnGridWithVariant } from "isaacscript-common";
 import { CollectibleTypeCustom } from "../constants";
 
 if (EID !== undefined) {
@@ -44,7 +44,7 @@ function applyEffect(player: EntityPlayer) {
     poopVariant = PoopGridEntityVariant.NORMAL;
   }
 
-  spawnGridEntityWithVariant(
+  spawnGridWithVariant(
     GridEntityType.GRID_POOP,
     poopVariant,
     room.GetGridIndex(playerPos),

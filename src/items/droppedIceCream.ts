@@ -1,3 +1,4 @@
+import { getRandomSeed } from "isaacscript-common";
 import { CollectibleTypeCustom } from "../constants";
 
 if (EID !== undefined) {
@@ -12,7 +13,7 @@ if (EID !== undefined) {
 export function checkHasItem(tear: Entity, player: EntityPlayer): void {
   const tearData = tear.GetData();
   const rng = RNG();
-  rng.SetSeed(Random(), 1);
+  rng.SetSeed(getRandomSeed(), 1);
 
   if (
     tearData.iceCream === undefined &&

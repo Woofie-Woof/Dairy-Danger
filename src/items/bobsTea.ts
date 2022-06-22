@@ -1,4 +1,4 @@
-import { round } from "isaacscript-common";
+import { getRandomSeed, round } from "isaacscript-common";
 import { CollectibleTypeCustom, MAX_BOBS_TEA_BONUS } from "../constants";
 
 if (EID !== undefined) {
@@ -142,7 +142,7 @@ export function fireIpecacTears(
   }
 
   const rng = RNG();
-  rng.SetSeed(Random(), 1);
+  rng.SetSeed(getRandomSeed(), 1);
 
   let firedTear = player.FireTear(
     player.Position,
