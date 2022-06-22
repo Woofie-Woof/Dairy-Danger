@@ -14,6 +14,7 @@
     "isaac-typescript-definitions": "^2.0.55",
     "isaacscript": "^2.3.0",
     "isaacscript-common": "^3.0.0",
-    "isaacscript-lint": "^1.2.1"
+    "isaacscript-lint": "^1.2.1",
+    "typescript-to-lua": "^1.6.0"
   }
 }
