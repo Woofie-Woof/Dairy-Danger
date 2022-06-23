@@ -8,12 +8,12 @@ import * as evaluateCache from "./callbacks/evaluateCache";
 import * as postEffectRender from "./callbacks/postEffectRender";
 import * as postItemPickup from "./callbacks/postItemPickup";
 import * as postLaserUpdate from "./callbacks/postLaserUpdate";
+import * as postPEffectUpdate from "./callbacks/postPEffectUpdate";
 import * as postPickupInit from "./callbacks/postPickupInit";
 import * as postPickupRender from "./callbacks/postPickupRender";
 import * as postPlayerChangeHealth from "./callbacks/postPlayerChangeHealth";
 import * as postRoomClearChanged from "./callbacks/postRoomClearChanged";
 import * as postTearUpdate from "./callbacks/postTearUpdate";
-import * as postUpdate from "./callbacks/postUpdate";
 import * as prePickupCollision from "./callbacks/prePickupCollision";
 import * as preTearCollision from "./callbacks/preTearCollision";
 import { CollectibleTypeCustom } from "./constants";
@@ -29,7 +29,7 @@ export function main(): void {
 }
 
 function registerVanillaCallbacks(mod: Mod) {
-  mod.AddCallback(ModCallback.POST_UPDATE, postUpdate.main); // 1
+  mod.AddCallback(ModCallback.POST_PEFFECT_UPDATE, postPEffectUpdate.main); // 4
   mod.AddCallback(ModCallback.EVALUATE_CACHE, evaluateCache.main); // 8
   mod.AddCallback(ModCallback.POST_PICKUP_INIT, postPickupInit.main); // 34
   mod.AddCallback(
