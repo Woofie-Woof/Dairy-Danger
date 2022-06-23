@@ -1,4 +1,5 @@
 import {
+  CacheFlag,
   ItemType,
   ModCallback,
   PickupVariant,
@@ -30,7 +31,11 @@ export function main(): void {
 
 function registerVanillaCallbacks(mod: Mod) {
   mod.AddCallback(ModCallback.POST_PEFFECT_UPDATE, postPEffectUpdate.main); // 4
-  mod.AddCallback(ModCallback.EVALUATE_CACHE, evaluateCache.main); // 8
+  mod.AddCallback(
+    ModCallback.EVALUATE_CACHE,
+    evaluateCache.fireDelay,
+    CacheFlag.FIRE_DELAY,
+  ); // 8
   mod.AddCallback(ModCallback.POST_PICKUP_INIT, postPickupInit.main); // 34
   mod.AddCallback(
     ModCallback.POST_PICKUP_RENDER,
