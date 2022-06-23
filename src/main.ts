@@ -21,57 +21,49 @@ import { CollectibleTypeCustom } from "./constants";
 const MOD_NAME = "Dairy-Danger";
 
 export function main(): void {
-  // Instantiate a new mod object, which grants the ability to add callback functions that
-  // correspond to in-game events.
-  const vanilla = RegisterMod(MOD_NAME, 1);
-  const dairyDanger = upgradeMod(vanilla);
+  const modVanilla = RegisterMod(MOD_NAME, 1);
+  const mod = upgradeMod(modVanilla);
 
   // Room clear
-  dairyDanger.AddCallback(ModCallback.PRE_SPAWN_CLEAN_AWARD, roomClear.main);
+  mod.AddCallback(ModCallback.PRE_SPAWN_CLEAN_AWARD, roomClear.main);
 
   // Tear update
-  dairyDanger.AddCallback(ModCallback.POST_TEAR_UPDATE, postTearUpdate.main);
+  mod.AddCallback(ModCallback.POST_TEAR_UPDATE, postTearUpdate.main);
 
   // Laser update
-  dairyDanger.AddCallback(ModCallback.POST_LASER_UPDATE, postLaserUpdate.main);
+  mod.AddCallback(ModCallback.POST_LASER_UPDATE, postLaserUpdate.main);
 
   // Evaluate cache
-  dairyDanger.AddCallback(ModCallback.EVALUATE_CACHE, evaluateCache.main);
+  mod.AddCallback(ModCallback.EVALUATE_CACHE, evaluateCache.main);
 
   // Pre tear collision
-  dairyDanger.AddCallback(
-    ModCallback.PRE_TEAR_COLLISION,
-    preTearCollision.main,
-  );
+  mod.AddCallback(ModCallback.PRE_TEAR_COLLISION, preTearCollision.main);
 
   // Post effect render
-  dairyDanger.AddCallback(
-    ModCallback.POST_EFFECT_RENDER,
-    postEffectRender.main,
-  );
+  mod.AddCallback(ModCallback.POST_EFFECT_RENDER, postEffectRender.main);
 
   // Post update
-  dairyDanger.AddCallback(ModCallback.POST_UPDATE, postUpdate.main);
+  mod.AddCallback(ModCallback.POST_UPDATE, postUpdate.main);
 
   // Post pickup init
-  dairyDanger.AddCallback(ModCallback.POST_PICKUP_INIT, postPickupInit.main);
+  mod.AddCallback(ModCallback.POST_PICKUP_INIT, postPickupInit.main);
 
   // Pre pickup collision for hearts.
-  dairyDanger.AddCallback(
+  mod.AddCallback(
     ModCallback.PRE_PICKUP_COLLISION,
     prePickupCollision.main,
     PickupVariant.HEART,
   );
 
   // Post pickup render for hearts.
-  dairyDanger.AddCallback(
+  mod.AddCallback(
     ModCallback.POST_PICKUP_RENDER,
     postPickupRender.main,
     PickupVariant.HEART,
   );
 
   // Post item pickup
-  dairyDanger.AddCallbackCustom(
+  mod.AddCallbackCustom(
     ModCallbackCustom.POST_ITEM_PICKUP,
     postItemPickup.main,
     ItemType.PASSIVE,
@@ -79,7 +71,7 @@ export function main(): void {
   );
 
   // Post change health
-  dairyDanger.AddCallbackCustom(
+  mod.AddCallbackCustom(
     ModCallbackCustom.POST_PLAYER_CHANGE_HEALTH,
     postPlayerChangeHealth.main,
   );
