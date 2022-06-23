@@ -1,7 +1,8 @@
+import { EffectVariant, EntityType } from "isaac-typescript-definitions";
 import { TrinketTypeCustom } from "../constants";
 
 export function checkHasTrinket(player: EntityPlayer): void {
-  if (player.HasTrinket(TrinketTypeCustom.TRINKET_LACTOSE_INTOLERANCE))
+  if (player.HasTrinket(TrinketTypeCustom.LACTOSE_INTOLERANCE))
     applyEffect(player);
 }
 
@@ -11,8 +12,8 @@ export function applyEffect(player: EntityPlayer): void {
 
   if (frameCount % 10 === 0) {
     const creep = Isaac.Spawn(
-      EntityType.ENTITY_EFFECT,
-      EffectVariant.PLAYER_CREEP_RED,
+      EntityType.EFFECT,
+      EffectVariant.CREEP_RED,
       0,
       player.Position,
       Vector.Zero,
