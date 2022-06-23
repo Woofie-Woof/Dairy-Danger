@@ -10,11 +10,11 @@ cd "$DIR"
 
 PACKAGE_JSON="$DIR/package.json"
 OLD_HASH=$(md5sum "$PACKAGE_JSON")
-npx npm-check-updates --upgrade --packageFile "$PACKAGE_JSON"
+npx npm-check-updates --upgrade --packageFile "$PACKAGE_JSON" --reject "typescript,typescript-to-lua"
 NEW_HASH=$(md5sum "$PACKAGE_JSON")
 if [[ $OLD_HASH != $NEW_HASH ]]; then
   if test -f "$DIR/yarn.lock"; then
-    yarn
+    yarn install
   elif test -f "$DIR/pnpm-lock.yaml"; then
     pnpm install
   else

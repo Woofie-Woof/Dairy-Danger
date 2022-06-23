@@ -1,4 +1,8 @@
-import { CollectibleType, TrinketType } from "isaac-typescript-definitions";
+import {
+  CollectibleType,
+  HeartSubType,
+  TrinketType,
+} from "isaac-typescript-definitions";
 
 export const CollectibleTypeCustom = {
   PROBIOTIC_YOGURT: Isaac.GetItemIdByName("Probiotic Yogurt"),
@@ -11,9 +15,9 @@ export const TrinketTypeCustom = {
   LACTOSE_INTOLERANCE: Isaac.GetTrinketIdByName("Lactose Intolerance"),
 } as const;
 
-export enum HeartSubTypeCustom {
-  HALF_BLACK = 1422,
-}
+export const HeartSubTypeCustom = {
+  HALF_BLACK: 1422 as HeartSubType,
+} as const;
 
 export const MAX_BOBS_TEA_BONUS = 1.5;
 

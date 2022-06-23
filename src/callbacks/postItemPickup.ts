@@ -1,5 +1,6 @@
-import * as darkChocolate from "../items/darkChocolate";
+import * as dc from "../items/darkChocolate";
 
-export function main(player: EntityPlayer): void {
-  darkChocolate.applyEffect(player); // TODO - Add code for new items here
+// CollectibleTypeCustom.DARK_CHOCOLATE
+export function darkChocolate(player: EntityPlayer): void {
+  dc.applyEffect(player);
 }
