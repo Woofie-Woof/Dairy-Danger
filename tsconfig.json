@@ -1,7 +1,7 @@
 // The configuration file for TypeScript.
 {
   // We extend the standard IsaacScript config:
-  // https://github.com/IsaacScript/isaacscript-tsconfig/blob/main/tsconfig.mod.json
+  // https://github.com/IsaacScript/isaacscript/blob/main/packages/isaacscript-tsconfig/tsconfig.mod.json
   "extends": "isaacscript-tsconfig/tsconfig.mod.json",
 
   // https://www.typescriptlang.org/docs/handbook/compiler-options.html
@@ -13,7 +13,7 @@
   // A list of the TypeScript files to compile.
   "include": ["./src/**/*.ts"],
 
-  // TypeScriptToLua settings
+  // TypeScriptToLua settings.
   "tstl": {
     "luaTarget": "5.3",
     "luaBundle": "./mod/main.lua", // Will bundle all output Lua files into a single file.

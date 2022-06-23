@@ -1,4 +1,4 @@
-import { ModCallbackCustom, ModUpgraded, upgradeMod } from "isaacscript-common";
+import { ModUpgraded, upgradeMod } from "isaacscript-common";
 import * as evaluateCache from "./callbacks/evaluateCache";
 import * as postEffectRender from "./callbacks/postEffectRender";
 import * as postLaserUpdate from "./callbacks/postLaserUpdate";
@@ -34,16 +34,7 @@ function registerVanillaCallbacks(mod: Mod) {
 }
 
 function registerCustomCallbacks(mod: ModUpgraded) {
-  mod.AddCallbackCustom(
-    ModCallbackCustom.POST_PLAYER_CHANGE_HEALTH,
-    postPlayerChangeHealth.main,
-  );
-  mod.AddCallbackCustom(
-    ModCallbackCustom.POST_ROOM_CLEAR_CHANGED,
-    postRoomClearChanged.roomCleared,
-  );
-  mod.AddCallbackCustom(
-    ModCallbackCustom.POST_TEAR_INIT_LATE,
-    postTearInitLate.main,
-  );
+  postPlayerChangeHealth.init(mod);
+  postRoomClearChanged.init(mod);
+  postTearInitLate.init(mod);
 }

@@ -1,7 +1,7 @@
 {
   "name": "dairy-danger",
   "version": "0.0.0",
-  "description": "A mod for The Binding of Isaac: Repentance",
+  "description": "A mod for The Binding of Isaac: Repentance.",
   "keywords": [
     "isaac",
     "mod",
@@ -10,6 +10,7 @@
     "repentance"
   ],
   "license": "GPL-3.0",
+  "type": "commonjs",
   "dependencies": {
     "isaac-typescript-definitions": "^2.0.60",
     "isaacscript": "^2.4.0",

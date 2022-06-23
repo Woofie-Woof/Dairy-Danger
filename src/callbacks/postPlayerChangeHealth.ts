@@ -5,10 +5,6 @@ export function init(mod: ModUpgraded): void {
   mod.AddCallbackCustom(ModCallbackCustom.POST_PLAYER_CHANGE_HEALTH, main);
 }
 
-export function main(
-  player: EntityPlayer,
-  healthType: HealthType,
-  difference: int,
-): void {
+function main(player: EntityPlayer, healthType: HealthType, difference: int) {
   darkChocolate.postPlayerChangeHealth(player, healthType, difference);
 }
