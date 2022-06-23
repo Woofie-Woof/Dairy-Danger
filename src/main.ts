@@ -29,23 +29,23 @@ export function main(): void {
 }
 
 function registerVanillaCallbacks(mod: Mod) {
-  mod.AddCallback(ModCallback.POST_TEAR_UPDATE, postTearUpdate.main);
-  mod.AddCallback(ModCallback.POST_LASER_UPDATE, postLaserUpdate.main);
-  mod.AddCallback(ModCallback.EVALUATE_CACHE, evaluateCache.main);
-  mod.AddCallback(ModCallback.PRE_TEAR_COLLISION, preTearCollision.main);
-  mod.AddCallback(ModCallback.POST_EFFECT_RENDER, postEffectRender.main);
-  mod.AddCallback(ModCallback.POST_UPDATE, postUpdate.main);
-  mod.AddCallback(ModCallback.POST_PICKUP_INIT, postPickupInit.main);
-  mod.AddCallback(
-    ModCallback.PRE_PICKUP_COLLISION,
-    prePickupCollision.main,
-    PickupVariant.HEART,
-  );
+  mod.AddCallback(ModCallback.POST_UPDATE, postUpdate.main); // 1
+  mod.AddCallback(ModCallback.EVALUATE_CACHE, evaluateCache.main); // 8
+  mod.AddCallback(ModCallback.POST_PICKUP_INIT, postPickupInit.main); // 34
   mod.AddCallback(
     ModCallback.POST_PICKUP_RENDER,
     postPickupRender.main,
     PickupVariant.HEART,
-  );
+  ); // 36
+  mod.AddCallback(
+    ModCallback.PRE_PICKUP_COLLISION,
+    prePickupCollision.main,
+    PickupVariant.HEART,
+  ); // 38
+  mod.AddCallback(ModCallback.POST_TEAR_UPDATE, postTearUpdate.main); // 40
+  mod.AddCallback(ModCallback.PRE_TEAR_COLLISION, preTearCollision.main); // 42
+  mod.AddCallback(ModCallback.POST_LASER_UPDATE, postLaserUpdate.main); // 48
+  mod.AddCallback(ModCallback.POST_EFFECT_RENDER, postEffectRender.main); // 56
 }
 
 function registerCustomCallbacks(mod: ModUpgraded) {
