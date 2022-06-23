@@ -43,12 +43,12 @@ function registerVanillaCallbacks(mod: Mod) {
   ); // 34
   mod.AddCallback(
     ModCallback.POST_PICKUP_RENDER,
-    postPickupRender.main,
+    postPickupRender.heart,
     PickupVariant.HEART,
   ); // 36
   mod.AddCallback(
     ModCallback.PRE_PICKUP_COLLISION,
-    prePickupCollision.main,
+    prePickupCollision.heart,
     PickupVariant.HEART,
   ); // 38
   mod.AddCallback(ModCallback.POST_TEAR_UPDATE, postTearUpdate.main); // 40
