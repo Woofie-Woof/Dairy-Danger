@@ -12,13 +12,18 @@ if (EID !== undefined) {
   EID.addCollectible(CollectibleTypeCustom.BOBS_TEA, itemDescription);
 }
 
-export function checkHasItem(player: EntityPlayer): void {
+// ModCallback.POST_PEFFECT_UPDATE (4)
+export function postPEffectUpdate(player: EntityPlayer): void {
+  checkHasItem(player);
+}
+
+function checkHasItem(player: EntityPlayer) {
   if (player.HasCollectible(CollectibleTypeCustom.BOBS_TEA)) {
     applyEffect(player);
   }
 }
 
-export function applyEffect(player: EntityPlayer): void {
+function applyEffect(player: EntityPlayer) {
   const playerData = player.GetData();
   const frameCount = game.GetFrameCount();
 
@@ -93,10 +98,10 @@ export function applyEffect(player: EntityPlayer): void {
   }
 }
 
-export function fireIpecacTears(
+function fireIpecacTears(
   player: EntityPlayer,
   playerData: Record<string, unknown>,
-): void {
+) {
   let x = 0;
   let y = 0;
   switch (playerData["currentStartDirection"]) {

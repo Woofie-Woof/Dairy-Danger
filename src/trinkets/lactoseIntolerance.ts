@@ -2,12 +2,16 @@ import { EffectVariant, EntityType } from "isaac-typescript-definitions";
 import { game, VectorZero } from "isaacscript-common";
 import { TrinketTypeCustom } from "../constants";
 
-export function checkHasTrinket(player: EntityPlayer): void {
+export function postPEffectUpdate(player: EntityPlayer): void {
+  checkHasTrinket(player);
+}
+
+function checkHasTrinket(player: EntityPlayer) {
   if (player.HasTrinket(TrinketTypeCustom.LACTOSE_INTOLERANCE))
     applyEffect(player);
 }
 
-export function applyEffect(player: EntityPlayer): void {
+function applyEffect(player: EntityPlayer) {
   const frameCount = game.GetFrameCount();
 
   if (frameCount % 10 === 0) {
