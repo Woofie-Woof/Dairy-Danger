@@ -1,17 +1,19 @@
+import {
+  ButtonAction,
+  CacheFlag,
+  TearFlag,
+} from "isaac-typescript-definitions";
 import { getRandomSeed, round } from "isaacscript-common";
 import { CollectibleTypeCustom, MAX_BOBS_TEA_BONUS } from "../constants";
 
 if (EID !== undefined) {
   const itemDescription =
     "↓ 0.8x Tears #Shooting continuously gradually increases your fire rate by up to 250%#At max fire rate, double tap a direction to shoot a cluster of Ipecac tears that deal 3x your damage and reset your fire rate";
-  EID.addCollectible(
-    CollectibleTypeCustom.COLLECTIBLE_BOBS_TEA,
-    itemDescription,
-  );
+  EID.addCollectible(CollectibleTypeCustom.BOBS_TEA, itemDescription);
 }
 
 export function checkHasItem(player: EntityPlayer): void {
-  if (player.HasCollectible(CollectibleTypeCustom.COLLECTIBLE_BOBS_TEA)) {
+  if (player.HasCollectible(CollectibleTypeCustom.BOBS_TEA)) {
     applyEffect(player);
   }
 }
@@ -21,97 +23,71 @@ export function applyEffect(player: EntityPlayer): void {
   const playerData = player.GetData();
   const frameCount = game.GetFrameCount();
 
-  if (playerData.currentBobsTeaBonus === undefined)
-    playerData.currentBobsTeaBonus = 0;
+  if (playerData["currentBobsTeaBonus"] === undefined)
+    playerData["currentBobsTeaBonus"] = 0;
 
-  playerData.currentStartDirection = -1;
-  if (
-    Input.IsActionTriggered(
-      ButtonAction.ACTION_SHOOTDOWN,
-      player.ControllerIndex,
-    )
-  )
-    playerData.currentStartDirection = ButtonAction.ACTION_SHOOTDOWN;
+  playerData["currentStartDirection"] = -1;
+  if (Input.IsActionTriggered(ButtonAction.SHOOT_DOWN, player.ControllerIndex))
+    playerData["currentStartDirection"] = ButtonAction.SHOOT_DOWN;
 
-  if (
-    Input.IsActionTriggered(ButtonAction.ACTION_SHOOTUP, player.ControllerIndex)
-  )
-    playerData.currentStartDirection = ButtonAction.ACTION_SHOOTUP;
+  if (Input.IsActionTriggered(ButtonAction.SHOOT_UP, player.ControllerIndex))
+    playerData["currentStartDirection"] = ButtonAction.SHOOT_UP;
 
-  if (
-    Input.IsActionTriggered(
-      ButtonAction.ACTION_SHOOTLEFT,
-      player.ControllerIndex,
-    )
-  )
-    playerData.currentStartDirection = ButtonAction.ACTION_SHOOTLEFT;
+  if (Input.IsActionTriggered(ButtonAction.SHOOT_LEFT, player.ControllerIndex))
+    playerData["currentStartDirection"] = ButtonAction.SHOOT_LEFT;
 
-  if (
-    Input.IsActionTriggered(
-      ButtonAction.ACTION_SHOOTRIGHT,
-      player.ControllerIndex,
-    )
-  )
-    playerData.currentStartDirection = ButtonAction.ACTION_SHOOTRIGHT;
+  if (Input.IsActionTriggered(ButtonAction.SHOOT_RIGHT, player.ControllerIndex))
+    playerData["currentStartDirection"] = ButtonAction.SHOOT_RIGHT;
 
-  if (playerData.currentStartDirection !== -1) {
+  if (playerData["currentStartDirection"] !== -1) {
     if (
-      Number(playerData.currentBobsTeaBonus) === MAX_BOBS_TEA_BONUS &&
-      playerData.currentStartDirection === playerData.lastStartDirection &&
-      frameCount - Number(playerData.lastStartPress) <= 20
+      Number(playerData["currentBobsTeaBonus"]) === MAX_BOBS_TEA_BONUS &&
+      playerData["currentStartDirection"] ===
+        playerData["lastStartDirection"] &&
+      frameCount - Number(playerData["lastStartPress"]) <= 20
     ) {
       fireIpecacTears(player, playerData);
 
-      playerData.currentBobsTeaBonus = 0;
-      player.AddCacheFlags(CacheFlag.CACHE_FIREDELAY);
+      playerData["currentBobsTeaBonus"] = 0;
+      player.AddCacheFlags(CacheFlag.FIRE_DELAY);
       player.EvaluateItems();
     }
 
-    if (playerData.currentBobsTeaBonus === 0)
-      playerData.startShoot = frameCount;
+    if (playerData["currentBobsTeaBonus"] === 0)
+      playerData["startShoot"] = frameCount;
 
-    playerData.lastStartPress = frameCount;
-    playerData.lastShootFrame = frameCount;
-    playerData.lastStartDirection = playerData.currentStartDirection;
+    playerData["lastStartPress"] = frameCount;
+    playerData["lastShootFrame"] = frameCount;
+    playerData["lastStartDirection"] = playerData["currentStartDirection"];
   }
 
   if (
-    Input.IsActionPressed(
-      ButtonAction.ACTION_SHOOTDOWN,
-      player.ControllerIndex,
-    ) ||
-    Input.IsActionPressed(
-      ButtonAction.ACTION_SHOOTUP,
-      player.ControllerIndex,
-    ) ||
-    Input.IsActionPressed(
-      ButtonAction.ACTION_SHOOTLEFT,
-      player.ControllerIndex,
-    ) ||
-    Input.IsActionPressed(
-      ButtonAction.ACTION_SHOOTRIGHT,
-      player.ControllerIndex,
-    )
+    Input.IsActionPressed(ButtonAction.SHOOT_DOWN, player.ControllerIndex) ||
+    Input.IsActionPressed(ButtonAction.SHOOT_UP, player.ControllerIndex) ||
+    Input.IsActionPressed(ButtonAction.SHOOT_LEFT, player.ControllerIndex) ||
+    Input.IsActionPressed(ButtonAction.SHOOT_RIGHT, player.ControllerIndex)
   )
-    playerData.lastShootFrame = frameCount;
+    playerData["lastShootFrame"] = frameCount;
 
   if (
-    playerData.startShoot !== undefined &&
-    playerData.lastShootFrame !== undefined
+    playerData["startShoot"] !== undefined &&
+    playerData["lastShootFrame"] !== undefined
   ) {
-    if (frameCount - Number(playerData.lastShootFrame) >= 30) {
-      playerData.currentBobsTeaBonus = 0;
-      playerData.startShoot = frameCount;
-      player.AddCacheFlags(CacheFlag.CACHE_FIREDELAY);
+    if (frameCount - Number(playerData["lastShootFrame"]) >= 30) {
+      playerData["currentBobsTeaBonus"] = 0;
+      playerData["startShoot"] = frameCount;
+      player.AddCacheFlags(CacheFlag.FIRE_DELAY);
       player.EvaluateItems();
-    } else if (Number(playerData.currentBobsTeaBonus) < MAX_BOBS_TEA_BONUS) {
-      const previousBonus = playerData.currentBobsTeaBonus;
-      playerData.currentBobsTeaBonus =
-        round(((frameCount - Number(playerData.startShoot)) / 90) * 2) / 2;
+    } else if (Number(playerData["currentBobsTeaBonus"]) < MAX_BOBS_TEA_BONUS) {
+      const previousBonus = playerData["currentBobsTeaBonus"];
+      playerData["currentBobsTeaBonus"] =
+        round(((frameCount - Number(playerData["startShoot"])) / 90) * 2) / 2;
 
-      if (previousBonus !== playerData.currentBobsTeaBonus) {
-        Isaac.DebugString(`Current bonus: ${playerData.currentBobsTeaBonus}`);
-        player.AddCacheFlags(CacheFlag.CACHE_FIREDELAY);
+      if (previousBonus !== playerData["currentBobsTeaBonus"]) {
+        Isaac.DebugString(
+          `Current bonus: ${playerData["currentBobsTeaBonus"]}`,
+        );
+        player.AddCacheFlags(CacheFlag.FIRE_DELAY);
         player.EvaluateItems();
       }
     }
@@ -124,17 +100,17 @@ export function fireIpecacTears(
 ): void {
   let x = 0;
   let y = 0;
-  switch (playerData.currentStartDirection) {
-    case ButtonAction.ACTION_SHOOTDOWN:
+  switch (playerData["currentStartDirection"]) {
+    case ButtonAction.SHOOT_DOWN:
       y = 10 * player.ShotSpeed;
       break;
-    case ButtonAction.ACTION_SHOOTUP:
+    case ButtonAction.SHOOT_UP:
       y = -10 * player.ShotSpeed;
       break;
-    case ButtonAction.ACTION_SHOOTLEFT:
+    case ButtonAction.SHOOT_LEFT:
       x = -10 * player.ShotSpeed;
       break;
-    case ButtonAction.ACTION_SHOOTRIGHT:
+    case ButtonAction.SHOOT_RIGHT:
       x = 10 * player.ShotSpeed;
       break;
     default:
@@ -153,7 +129,7 @@ export function fireIpecacTears(
     undefined,
     3,
   );
-  firedTear.AddTearFlags(TearFlags.TEAR_EXPLOSIVE);
+  firedTear.AddTearFlags(TearFlag.EXPLOSIVE);
   firedTear.FallingAcceleration = 0.75;
   firedTear.FallingSpeed = -15;
   firedTear.SetColor(Color(0.5, 0.9, 0.4), 0, 1);
@@ -167,7 +143,7 @@ export function fireIpecacTears(
     undefined,
     3,
   );
-  firedTear.AddTearFlags(TearFlags.TEAR_EXPLOSIVE);
+  firedTear.AddTearFlags(TearFlag.EXPLOSIVE);
   firedTear.FallingAcceleration = 0.75;
   firedTear.FallingSpeed = -15;
   firedTear.SetColor(Color(0.5, 0.9, 0.4), 0, 1);
@@ -181,7 +157,7 @@ export function fireIpecacTears(
     undefined,
     3,
   );
-  firedTear.AddTearFlags(TearFlags.TEAR_EXPLOSIVE);
+  firedTear.AddTearFlags(TearFlag.EXPLOSIVE);
   firedTear.FallingAcceleration = 0.75;
   firedTear.FallingSpeed = -15;
   firedTear.SetColor(Color(0.5, 0.9, 0.4), 0, 1);
@@ -195,7 +171,7 @@ export function fireIpecacTears(
     undefined,
     3,
   );
-  firedTear.AddTearFlags(TearFlags.TEAR_EXPLOSIVE);
+  firedTear.AddTearFlags(TearFlag.EXPLOSIVE);
   firedTear.FallingAcceleration = 0.75;
   firedTear.FallingSpeed = -15;
   firedTear.SetColor(Color(0.5, 0.9, 0.4), 0, 1);
@@ -209,7 +185,7 @@ export function fireIpecacTears(
     undefined,
     3,
   );
-  firedTear.AddTearFlags(TearFlags.TEAR_EXPLOSIVE);
+  firedTear.AddTearFlags(TearFlag.EXPLOSIVE);
   firedTear.FallingAcceleration = 0.75;
   firedTear.FallingSpeed = -15;
   firedTear.SetColor(Color(0.5, 0.9, 0.4), 0, 1);
@@ -223,7 +199,7 @@ export function fireIpecacTears(
     undefined,
     3,
   );
-  firedTear.AddTearFlags(TearFlags.TEAR_EXPLOSIVE);
+  firedTear.AddTearFlags(TearFlag.EXPLOSIVE);
   firedTear.FallingAcceleration = 0.75;
   firedTear.FallingSpeed = -15;
   firedTear.SetColor(Color(0.5, 0.9, 0.4), 0, 1);

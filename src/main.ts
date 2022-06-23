@@ -1,4 +1,9 @@
-import { ModCallbacksCustom, upgradeMod } from "isaacscript-common";
+import {
+  ItemType,
+  ModCallback,
+  PickupVariant,
+} from "isaac-typescript-definitions";
+import { ModCallbackCustom, upgradeMod } from "isaacscript-common";
 import * as evaluateCache from "./callbacks/evaluateCache";
 import * as postEffectRender from "./callbacks/postEffectRender";
 import * as postItemPickup from "./callbacks/postItemPickup";
@@ -17,77 +22,65 @@ const MOD_NAME = "Dairy-Danger";
 
 export function main(): void {
   // Instantiate a new mod object, which grants the ability to add callback functions that
-  // correspond to in-game events
+  // correspond to in-game events.
   const vanilla = RegisterMod(MOD_NAME, 1);
   const dairyDanger = upgradeMod(vanilla);
 
   // Room clear
-  dairyDanger.AddCallback(
-    ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD,
-    roomClear.main,
-  );
+  dairyDanger.AddCallback(ModCallback.PRE_SPAWN_CLEAN_AWARD, roomClear.main);
 
   // Tear update
-  dairyDanger.AddCallback(
-    ModCallbacks.MC_POST_TEAR_UPDATE,
-    postTearUpdate.main,
-  );
+  dairyDanger.AddCallback(ModCallback.POST_TEAR_UPDATE, postTearUpdate.main);
 
   // Laser update
-  dairyDanger.AddCallback(
-    ModCallbacks.MC_POST_LASER_UPDATE,
-    postLaserUpdate.main,
-  );
+  dairyDanger.AddCallback(ModCallback.POST_LASER_UPDATE, postLaserUpdate.main);
 
   // Evaluate cache
-  dairyDanger.AddCallback(ModCallbacks.MC_EVALUATE_CACHE, evaluateCache.main);
+  dairyDanger.AddCallback(ModCallback.EVALUATE_CACHE, evaluateCache.main);
 
   // Pre tear collision
   dairyDanger.AddCallback(
-    ModCallbacks.MC_PRE_TEAR_COLLISION,
+    ModCallback.PRE_TEAR_COLLISION,
     preTearCollision.main,
   );
 
   // Post effect render
   dairyDanger.AddCallback(
-    ModCallbacks.MC_POST_EFFECT_RENDER,
+    ModCallback.POST_EFFECT_RENDER,
     postEffectRender.main,
   );
 
   // Post update
-  dairyDanger.AddCallback(ModCallbacks.MC_POST_UPDATE, postUpdate.main);
+  dairyDanger.AddCallback(ModCallback.POST_UPDATE, postUpdate.main);
 
   // Post pickup init
-  dairyDanger.AddCallback(
-    ModCallbacks.MC_POST_PICKUP_INIT,
-    postPickupInit.main,
-  );
+  dairyDanger.AddCallback(ModCallback.POST_PICKUP_INIT, postPickupInit.main);
 
-  // Pre pickup collision for hearts
+  // Pre pickup collision for hearts.
   dairyDanger.AddCallback(
-    ModCallbacks.MC_PRE_PICKUP_COLLISION,
+    ModCallback.PRE_PICKUP_COLLISION,
     prePickupCollision.main,
-    PickupVariant.PICKUP_HEART,
+    PickupVariant.HEART,
   );
 
-  // Post pickup render for hearts
+  // Post pickup render for hearts.
   dairyDanger.AddCallback(
-    ModCallbacks.MC_POST_PICKUP_RENDER,
+    ModCallback.POST_PICKUP_RENDER,
     postPickupRender.main,
-    PickupVariant.PICKUP_HEART,
+    PickupVariant.HEART,
   );
 
   // Post item pickup
   dairyDanger.AddCallbackCustom(
-    ModCallbacksCustom.MC_POST_ITEM_PICKUP,
+    ModCallbackCustom.POST_ITEM_PICKUP,
     postItemPickup.main,
-    ItemType.ITEM_PASSIVE,
-    CollectibleTypeCustom.COLLECTIBLE_DARK_CHOCOLATE,
+    ItemType.PASSIVE,
+    CollectibleTypeCustom.DARK_CHOCOLATE,
   );
 
   // Post change health
   dairyDanger.AddCallbackCustom(
-    ModCallbacksCustom.MC_POST_PLAYER_CHANGE_HEALTH,
+    ModCallbackCustom.POST_PLAYER_CHANGE_HEALTH,
     postPlayerChangeHealth.main,
   );
 }

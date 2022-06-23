@@ -1,13 +1,16 @@
+import {
+  GridEntityType,
+  PoopGridEntityVariant,
+  RoomType,
+  SoundEffect,
+} from "isaac-typescript-definitions";
 import { spawnGridWithVariant } from "isaacscript-common";
 import { CollectibleTypeCustom } from "../constants";
 
 if (EID !== undefined) {
   const itemDescription =
     "Spawns poop when you clear a room#Poop type depends on room cleared:#{{Room}}: Normal#{{Shop}}: Golden#{{AngelRoom}}: Holy#{{DevilRoom}}/{{CursedRoom}}: Black#{{BossRoom}}: Rainbow";
-  EID.addCollectible(
-    CollectibleTypeCustom.COLLECTIBLE_PROBIOTIC_YOGURT,
-    itemDescription,
-  );
+  EID.addCollectible(CollectibleTypeCustom.PROBIOTIC_YOGURT, itemDescription);
 }
 
 export function checkHasItem(): void {
@@ -17,7 +20,7 @@ export function checkHasItem(): void {
     const player = Isaac.GetPlayer(i);
     if (
       player !== undefined &&
-      player.HasCollectible(CollectibleTypeCustom.COLLECTIBLE_PROBIOTIC_YOGURT)
+      player.HasCollectible(CollectibleTypeCustom.PROBIOTIC_YOGURT)
     ) {
       applyEffect(player);
     }
@@ -30,11 +33,11 @@ function applyEffect(player: EntityPlayer) {
   const playerPos = player.Position;
 
   const entityTypes: Map<RoomType, number> = new Map<RoomType, number>([
-    [RoomType.ROOM_CURSE, PoopGridEntityVariant.BLACK],
-    [RoomType.ROOM_DEVIL, PoopGridEntityVariant.BLACK],
-    [RoomType.ROOM_BOSS, PoopGridEntityVariant.RAINBOW],
-    [RoomType.ROOM_ANGEL, PoopGridEntityVariant.WHITE],
-    [RoomType.ROOM_SHOP, PoopGridEntityVariant.GOLDEN],
+    [RoomType.CURSE, PoopGridEntityVariant.BLACK],
+    [RoomType.DEVIL, PoopGridEntityVariant.BLACK],
+    [RoomType.BOSS, PoopGridEntityVariant.RAINBOW],
+    [RoomType.ANGEL, PoopGridEntityVariant.WHITE],
+    [RoomType.SHOP, PoopGridEntityVariant.GOLDEN],
   ]);
 
   const roomType = room.GetType();
@@ -45,10 +48,10 @@ function applyEffect(player: EntityPlayer) {
   }
 
   spawnGridWithVariant(
-    GridEntityType.GRID_POOP,
+    GridEntityType.POOP,
     poopVariant,
     room.GetGridIndex(playerPos),
   );
 
-  SFXManager().Play(SoundEffect.SOUND_FART);
+  SFXManager().Play(SoundEffect.FART);
 }

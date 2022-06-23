@@ -1,13 +1,11 @@
+import { EntityType } from "isaac-typescript-definitions";
 import { getRandomSeed } from "isaacscript-common";
 import { CollectibleTypeCustom } from "../constants";
 
 if (EID !== undefined) {
   const itemDescription =
     "↑ +0.5 Tears up#10% chance while firing to shoot an ice cream shot#Ice cream shot: 1.5x damage and creates slippery creep on impact";
-  EID.addCollectible(
-    CollectibleTypeCustom.COLLECTIBLE_DROPPED_ICE_CREAM,
-    itemDescription,
-  );
+  EID.addCollectible(CollectibleTypeCustom.DROPPED_ICE_CREAM, itemDescription);
 }
 
 export function checkHasItem(tear: Entity, player: EntityPlayer): void {
@@ -16,11 +14,9 @@ export function checkHasItem(tear: Entity, player: EntityPlayer): void {
   rng.SetSeed(getRandomSeed(), 1);
 
   if (
-    tearData.iceCream === undefined &&
+    tearData["iceCream"] === undefined &&
     player !== undefined &&
-    player.HasCollectible(
-      CollectibleTypeCustom.COLLECTIBLE_DROPPED_ICE_CREAM,
-    ) &&
+    player.HasCollectible(CollectibleTypeCustom.DROPPED_ICE_CREAM) &&
     rng.RandomInt(101) <= 10
   ) {
     applyEffect(tear, player, rng);
@@ -29,7 +25,7 @@ export function checkHasItem(tear: Entity, player: EntityPlayer): void {
 
 function applyEffect(tear: Entity, player: EntityPlayer, rng: RNG) {
   let velocity = tear.Velocity;
-  if (tear.Type === EntityType.ENTITY_LASER)
+  if (tear.Type === EntityType.LASER)
     velocity = player.GetShootingInput().mul(player.ShotSpeed * 10);
   const firedTear = player.FireTear(
     player.Position,
@@ -49,8 +45,9 @@ function applyEffect(tear: Entity, player: EntityPlayer, rng: RNG) {
     ];
 
     const tearData = firedTear.GetData();
-    tearData.iceCream = true;
+    tearData["iceCream"] = true;
     const colorIndex = rng.RandomInt(3);
-    firedTear.SetColor(colors[colorIndex], 0, 1);
+    const color = colors[colorIndex];
+    if (color !== undefined) firedTear.SetColor(color, 0, 1);
   }
 }

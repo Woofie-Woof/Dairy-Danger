@@ -1,4 +1,9 @@
 import {
+  EntityFlag,
+  EntityType,
+  SoundEffect,
+} from "isaac-typescript-definitions";
+import {
   characterCanHaveSoulHearts,
   countSetBits,
   isBethany,
@@ -12,7 +17,7 @@ export function main(
 ): boolean | void {
   if (
     pickup.SubType === HeartSubTypeCustom.HALF_BLACK &&
-    collider.Type === EntityType.ENTITY_PLAYER
+    collider.Type === EntityType.PLAYER
   ) {
     const sprite = pickup.GetSprite();
     const player = collider.ToPlayer();
@@ -36,10 +41,10 @@ export function main(
         }
 
         const sfx = SFXManager();
-        sfx.Play(SoundEffect.SOUND_UNHOLY);
+        sfx.Play(SoundEffect.UNHOLY);
         sprite.Play("Collect", true);
-        pickup.AddEntityFlags(EntityFlag.FLAG_NO_KNOCKBACK);
-        pickup.AddEntityFlags(EntityFlag.FLAG_NO_PHYSICS_KNOCKBACK);
+        pickup.AddEntityFlags(EntityFlag.NO_KNOCKBACK);
+        pickup.AddEntityFlags(EntityFlag.NO_PHYSICS_KNOCKBACK);
       }
 
       return true;

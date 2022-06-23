@@ -8,7 +8,7 @@ export function main(
   amount: int,
 ): void {
   if (
-    player.HasCollectible(CollectibleTypeCustom.COLLECTIBLE_DARK_CHOCOLATE) &&
+    player.HasCollectible(CollectibleTypeCustom.DARK_CHOCOLATE) &&
     healthType !== HealthType.BLACK &&
     amount > 0
   ) {
