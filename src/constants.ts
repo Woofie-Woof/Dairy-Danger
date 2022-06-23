@@ -21,6 +21,8 @@ export const HeartSubTypeCustom = {
 
 export const MAX_BOBS_TEA_BONUS = 1.5;
 
+export const MOD_NAME = "Dairy-Danger";
+
 export const MILK_ITEM_IDS = [
   CollectibleType.MILK,
   CollectibleType.SOY_MILK,

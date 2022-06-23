@@ -17,11 +17,11 @@ import * as postRoomClearChanged from "./callbacks/postRoomClearChanged";
 import * as postTearUpdate from "./callbacks/postTearUpdate";
 import * as prePickupCollision from "./callbacks/prePickupCollision";
 import * as preTearCollision from "./callbacks/preTearCollision";
-import { CollectibleTypeCustom } from "./constants";
+import { CollectibleTypeCustom, MOD_NAME } from "./constants";
 
-const MOD_NAME = "Dairy-Danger";
+main();
 
-export function main(): void {
+function main() {
   const modVanilla = RegisterMod(MOD_NAME, 1);
   const mod = upgradeMod(modVanilla);
 

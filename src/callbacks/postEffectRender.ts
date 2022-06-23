@@ -1,8 +1,9 @@
 import { EffectVariant } from "isaac-typescript-definitions";
+import { log } from "isaacscript-common";
 
 export function main(effect: EntityEffect): void {
   if (effect.Variant === EffectVariant.CREEP_SLIPPERY_BROWN) {
-    Isaac.DebugString("Found slippery creep!");
+    log("Found slippery creep!");
     const creepData = effect.GetData();
     if (
       creepData["iceCream"] !== undefined &&
@@ -11,7 +12,7 @@ export function main(effect: EntityEffect): void {
       typeof creepData["iceCreamG"] === "number" &&
       typeof creepData["iceCreamB"] === "number"
     ) {
-      Isaac.DebugString("Found ice cream creep!");
+      log("Found ice cream creep!");
       const newCreepColor = Color(1, 1, 1);
       newCreepColor.SetColorize(
         creepData["iceCreamR"] * 4,

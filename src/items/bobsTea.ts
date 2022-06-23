@@ -3,7 +3,7 @@ import {
   CacheFlag,
   TearFlag,
 } from "isaac-typescript-definitions";
-import { game, getRandomSeed, round } from "isaacscript-common";
+import { game, getRandomSeed, log, round } from "isaacscript-common";
 import { CollectibleTypeCustom, MAX_BOBS_TEA_BONUS } from "../constants";
 
 if (EID !== undefined) {
@@ -88,9 +88,7 @@ function applyEffect(player: EntityPlayer) {
         round(((frameCount - Number(playerData["startShoot"])) / 90) * 2) / 2;
 
       if (previousBonus !== playerData["currentBobsTeaBonus"]) {
-        Isaac.DebugString(
-          `Current bonus: ${playerData["currentBobsTeaBonus"]}`,
-        );
+        log(`Current bonus: ${playerData["currentBobsTeaBonus"]}`);
         player.AddCacheFlags(CacheFlag.FIRE_DELAY);
         player.EvaluateItems();
       }
