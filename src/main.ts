@@ -14,7 +14,7 @@ import * as postPickupInit from "./callbacks/postPickupInit";
 import * as postPickupRender from "./callbacks/postPickupRender";
 import * as postPlayerChangeHealth from "./callbacks/postPlayerChangeHealth";
 import * as postRoomClearChanged from "./callbacks/postRoomClearChanged";
-import * as postTearUpdate from "./callbacks/postTearUpdate";
+import * as postTearInitLate from "./callbacks/postTearInitLate";
 import * as prePickupCollision from "./callbacks/prePickupCollision";
 import * as preTearCollision from "./callbacks/preTearCollision";
 import { CollectibleTypeCustom, MOD_NAME } from "./constants";
@@ -51,7 +51,6 @@ function registerVanillaCallbacks(mod: Mod) {
     prePickupCollision.heart,
     PickupVariant.HEART,
   ); // 38
-  mod.AddCallback(ModCallback.POST_TEAR_UPDATE, postTearUpdate.main); // 40
   mod.AddCallback(ModCallback.PRE_TEAR_COLLISION, preTearCollision.main); // 42
   mod.AddCallback(ModCallback.POST_LASER_UPDATE, postLaserUpdate.main); // 48
   mod.AddCallback(ModCallback.POST_EFFECT_RENDER, postEffectRender.main); // 56
@@ -71,5 +70,9 @@ function registerCustomCallbacks(mod: ModUpgraded) {
   mod.AddCallbackCustom(
     ModCallbackCustom.POST_ROOM_CLEAR_CHANGED,
     postRoomClearChanged.roomCleared,
+  );
+  mod.AddCallbackCustom(
+    ModCallbackCustom.POST_TEAR_INIT_LATE,
+    postTearInitLate.main,
   );
 }
