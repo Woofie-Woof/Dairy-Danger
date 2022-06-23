@@ -60,25 +60,40 @@ export function changeHearts(heart: EntityPickupHeart): void {
   heart.Remove();
 }
 
-export function changeHealthUp(
+// ModCallbackCustom.POST_PLAYER_CHANGE_HEALTH
+export function postPlayerChangeHealth(
   player: EntityPlayer,
-  amount: int,
   healthType: HealthType,
+  difference: int,
 ): void {
+  if (
+    player.HasCollectible(CollectibleTypeCustom.DARK_CHOCOLATE) &&
+    healthType !== HealthType.BLACK &&
+    difference > 0
+  ) {
+    changeHealthUp(player, difference, healthType);
+  }
+}
+
+function changeHealthUp(
+  player: EntityPlayer,
+  difference: int,
+  healthType: HealthType,
+) {
   if (healthType === HealthType.MAX_HEARTS)
-    player.AddMaxHearts(amount * -1, true);
+    player.AddMaxHearts(difference * -1, true);
 
   if (healthType === HealthType.BONE) {
-    player.AddBoneHearts(amount * -1);
+    player.AddBoneHearts(difference * -1);
   }
 
   if (healthType === HealthType.SOUL) {
-    player.AddSoulCharge(amount * -1);
+    player.AddSoulCharge(difference * -1);
   }
 
   if (healthType === HealthType.ETERNAL) {
-    player.AddEternalHearts(amount * -1);
+    player.AddEternalHearts(difference * -1);
   }
 
-  player.AddBlackHearts(amount);
+  player.AddBlackHearts(difference);
 }

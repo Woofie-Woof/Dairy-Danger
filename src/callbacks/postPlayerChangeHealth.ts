@@ -1,17 +1,14 @@
-import { HealthType } from "isaacscript-common";
-import { CollectibleTypeCustom } from "../constants";
+import { HealthType, ModCallbackCustom, ModUpgraded } from "isaacscript-common";
 import * as darkChocolate from "../items/darkChocolate";
+
+export function init(mod: ModUpgraded): void {
+  mod.AddCallbackCustom(ModCallbackCustom.POST_PLAYER_CHANGE_HEALTH, main);
+}
 
 export function main(
   player: EntityPlayer,
   healthType: HealthType,
-  amount: int,
+  difference: int,
 ): void {
-  if (
-    player.HasCollectible(CollectibleTypeCustom.DARK_CHOCOLATE) &&
-    healthType !== HealthType.BLACK &&
-    amount > 0
-  ) {
-    darkChocolate.changeHealthUp(player, amount, healthType);
-  }
+  darkChocolate.postPlayerChangeHealth(player, healthType, difference);
 }
