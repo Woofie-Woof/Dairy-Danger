@@ -4,7 +4,7 @@ import {
   HeartSubType,
   PickupVariant,
 } from "isaac-typescript-definitions";
-import { HealthType, VectorZero } from "isaacscript-common";
+import { game, HealthType, VectorZero } from "isaacscript-common";
 import { CollectibleTypeCustom, HeartSubTypeCustom } from "../constants";
 
 const HeartConversions = new Map<HeartSubType, number>([
@@ -21,7 +21,6 @@ const HeartConversions = new Map<HeartSubType, number>([
 ]);
 
 export function checkHasItem(pickup: EntityPickup): void {
-  const game = Game();
   const numPlayers = game.GetNumPlayers();
   for (let i = 0; i < numPlayers; i++) {
     const player = Isaac.GetPlayer(i);

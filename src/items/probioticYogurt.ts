@@ -4,7 +4,7 @@ import {
   RoomType,
   SoundEffect,
 } from "isaac-typescript-definitions";
-import { spawnGridWithVariant } from "isaacscript-common";
+import { game, spawnGridWithVariant } from "isaacscript-common";
 import { CollectibleTypeCustom } from "../constants";
 
 if (EID !== undefined) {
@@ -14,7 +14,6 @@ if (EID !== undefined) {
 }
 
 export function checkHasItem(): void {
-  const game = Game();
   const numPlayers = game.GetNumPlayers();
   for (let i = 0; i < numPlayers; i++) {
     const player = Isaac.GetPlayer(i);
@@ -28,7 +27,6 @@ export function checkHasItem(): void {
 }
 
 function applyEffect(player: EntityPlayer) {
-  const game = Game();
   const room = game.GetRoom();
   const playerPos = player.Position;
 

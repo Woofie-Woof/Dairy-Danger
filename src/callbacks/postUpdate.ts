@@ -1,8 +1,8 @@
+import { game } from "isaacscript-common";
 import * as bobsTea from "../items/bobsTea";
 import * as lactoseIntolerance from "../trinkets/lactoseIntolerance";
 
 export function main(): void {
-  const game = Game();
   const numPlayers = game.GetNumPlayers();
   for (let i = 0; i < numPlayers; i++) {
     const player = Isaac.GetPlayer(i);

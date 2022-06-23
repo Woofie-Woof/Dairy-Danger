@@ -1,5 +1,5 @@
 import { EffectVariant, EntityType } from "isaac-typescript-definitions";
-import { VectorZero } from "isaacscript-common";
+import { game, VectorZero } from "isaacscript-common";
 import { TrinketTypeCustom } from "../constants";
 
 export function checkHasTrinket(player: EntityPlayer): void {
@@ -8,7 +8,6 @@ export function checkHasTrinket(player: EntityPlayer): void {
 }
 
 export function applyEffect(player: EntityPlayer): void {
-  const game = Game();
   const frameCount = game.GetFrameCount();
 
   if (frameCount % 10 === 0) {

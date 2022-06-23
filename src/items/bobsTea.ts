@@ -3,7 +3,7 @@ import {
   CacheFlag,
   TearFlag,
 } from "isaac-typescript-definitions";
-import { getRandomSeed, round } from "isaacscript-common";
+import { game, getRandomSeed, round } from "isaacscript-common";
 import { CollectibleTypeCustom, MAX_BOBS_TEA_BONUS } from "../constants";
 
 if (EID !== undefined) {
@@ -19,7 +19,6 @@ export function checkHasItem(player: EntityPlayer): void {
 }
 
 export function applyEffect(player: EntityPlayer): void {
-  const game = Game();
   const playerData = player.GetData();
   const frameCount = game.GetFrameCount();
 
