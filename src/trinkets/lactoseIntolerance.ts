@@ -1,4 +1,5 @@
 import { EffectVariant, EntityType } from "isaac-typescript-definitions";
+import { VectorZero } from "isaacscript-common";
 import { TrinketTypeCustom } from "../constants";
 
 export function checkHasTrinket(player: EntityPlayer): void {
@@ -16,7 +17,7 @@ export function applyEffect(player: EntityPlayer): void {
       EffectVariant.CREEP_RED,
       0,
       player.Position,
-      Vector.Zero,
+      VectorZero,
       player,
     ).ToEffect();
 
