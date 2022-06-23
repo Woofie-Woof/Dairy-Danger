@@ -1,5 +1,6 @@
 import * as darkChocolate from "../items/darkChocolate";
 
-export function main(pickup: EntityPickup): void {
-  darkChocolate.checkHasItem(pickup);
+// PickupVariant.HEART (10)
+export function heart(pickup: EntityPickupHeart): void {
+  darkChocolate.postPickupInitHeart(pickup);
 }

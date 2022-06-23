@@ -36,7 +36,11 @@ function registerVanillaCallbacks(mod: Mod) {
     evaluateCache.fireDelay,
     CacheFlag.FIRE_DELAY,
   ); // 8
-  mod.AddCallback(ModCallback.POST_PICKUP_INIT, postPickupInit.main); // 34
+  mod.AddCallback(
+    ModCallback.POST_PICKUP_INIT,
+    postPickupInit.heart,
+    PickupVariant.HEART,
+  ); // 34
   mod.AddCallback(
     ModCallback.POST_PICKUP_RENDER,
     postPickupRender.main,

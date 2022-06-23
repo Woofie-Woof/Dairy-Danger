@@ -1,13 +1,12 @@
+import { EntityFlag, HeartSubType } from "isaac-typescript-definitions";
 import {
-  EntityFlag,
-  EntityType,
-  HeartSubType,
-  PickupVariant,
-} from "isaac-typescript-definitions";
-import { game, HealthType, VectorZero } from "isaacscript-common";
+  anyPlayerHasCollectible,
+  HealthType,
+  spawnHeart,
+} from "isaacscript-common";
 import { CollectibleTypeCustom, HeartSubTypeCustom } from "../constants";
 
-const HeartConversions = new Map<HeartSubType, number>([
+const HEART_CONVERSION_MAP = new Map<HeartSubType, HeartSubType>([
   [HeartSubType.FULL, HeartSubType.BLACK],
   [HeartSubType.ROTTEN, HeartSubType.BLACK],
   [HeartSubType.SOUL, HeartSubType.BLACK],
@@ -20,17 +19,13 @@ const HeartConversions = new Map<HeartSubType, number>([
   [HeartSubType.HALF_SOUL, HeartSubTypeCustom.HALF_BLACK],
 ]);
 
-export function checkHasItem(pickup: EntityPickup): void {
-  const numPlayers = game.GetNumPlayers();
-  for (let i = 0; i < numPlayers; i++) {
-    const player = Isaac.GetPlayer(i);
-    if (
-      player !== undefined &&
-      player.HasCollectible(CollectibleTypeCustom.DARK_CHOCOLATE) &&
-      pickup.Variant === PickupVariant.HEART
-    ) {
-      changeHearts(pickup);
-    }
+export function postPickupInitHeart(heart: EntityPickupHeart): void {
+  checkHasItem(heart);
+}
+
+export function checkHasItem(heart: EntityPickupHeart): void {
+  if (anyPlayerHasCollectible(CollectibleTypeCustom.DARK_CHOCOLATE)) {
+    changeHearts(heart);
   }
 }
 
@@ -41,32 +36,28 @@ export function applyEffect(player: EntityPlayer): void {
   player.AddBlackHearts(playerRedHearts);
 }
 
-export function changeHearts(pickup: EntityPickup): void {
+export function changeHearts(heart: EntityPickupHeart): void {
   if (
-    pickup.SubType !== HeartSubType.BLACK &&
-    pickup.SubType !== HeartSubTypeCustom.HALF_BLACK
+    heart.SubType === HeartSubType.BLACK ||
+    heart.SubType === HeartSubTypeCustom.HALF_BLACK
   ) {
-    let convertedType = HeartConversions.get(pickup.SubType);
-
-    if (convertedType === undefined) convertedType = pickup.SubType;
-
-    const spawnedBlackHeart = Isaac.Spawn(
-      EntityType.PICKUP,
-      PickupVariant.HEART,
-      convertedType,
-      pickup.Position,
-      VectorZero,
-      undefined,
-    ).ToPickup();
-
-    if (pickup.IsShopItem() && spawnedBlackHeart !== undefined) {
-      spawnedBlackHeart.ClearEntityFlags(EntityFlag.APPEAR);
-      spawnedBlackHeart.Price = pickup.Price;
-      spawnedBlackHeart.ShopItemId = pickup.ShopItemId;
-    }
-
-    pickup.Remove();
+    return;
   }
+
+  let convertedType = HEART_CONVERSION_MAP.get(heart.SubType);
+  if (convertedType === undefined) {
+    convertedType = heart.SubType;
+  }
+
+  const blackHeart = spawnHeart(convertedType, heart.Position);
+
+  if (heart.IsShopItem()) {
+    blackHeart.ClearEntityFlags(EntityFlag.APPEAR);
+    blackHeart.Price = heart.Price;
+    blackHeart.ShopItemId = heart.ShopItemId;
+  }
+
+  heart.Remove();
 }
 
 export function changeHealthUp(
@@ -77,11 +68,17 @@ export function changeHealthUp(
   if (healthType === HealthType.MAX_HEARTS)
     player.AddMaxHearts(amount * -1, true);
 
-  if (healthType === HealthType.BONE) player.AddBoneHearts(amount * -1);
+  if (healthType === HealthType.BONE) {
+    player.AddBoneHearts(amount * -1);
+  }
 
-  if (healthType === HealthType.SOUL) player.AddSoulCharge(amount * -1);
+  if (healthType === HealthType.SOUL) {
+    player.AddSoulCharge(amount * -1);
+  }
 
-  if (healthType === HealthType.ETERNAL) player.AddEternalHearts(amount * -1);
+  if (healthType === HealthType.ETERNAL) {
+    player.AddEternalHearts(amount * -1);
+  }
 
   player.AddBlackHearts(amount);
 }
