@@ -1,6 +1,6 @@
 {
-  "name": "Dairy-Danger",
-  "version": "0.0.1",
+  "name": "dairy-danger",
+  "version": "0.0.0",
   "description": "A mod for The Binding of Isaac: Repentance",
   "keywords": [
     "isaac",
@@ -11,10 +11,11 @@
   ],
   "license": "GPL-3.0",
   "dependencies": {
-    "isaac-typescript-definitions": "^2.0.55",
+    "isaac-typescript-definitions": "^2.0.59",
     "isaacscript": "^2.3.0",
-    "isaacscript-common": "^3.0.0",
-    "isaacscript-lint": "^1.2.1",
-    "typescript-to-lua": "^1.6.0"
+    "isaacscript-common": "^3.4.1",
+    "isaacscript-lint": "^1.2.4",
+    "typescript": "4.6.4",
+    "typescript-to-lua": "1.5.0"
   }
 }
