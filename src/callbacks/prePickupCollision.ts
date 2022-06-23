@@ -1,6 +1,8 @@
 import {
   EntityFlag,
   EntityType,
+  ModCallback,
+  PickupVariant,
   SoundEffect,
 } from "isaac-typescript-definitions";
 import {
@@ -11,8 +13,12 @@ import {
 } from "isaacscript-common";
 import { HeartSubTypeCustom } from "../constants";
 
+export function init(mod: Mod): void {
+  mod.AddCallback(ModCallback.PRE_PICKUP_COLLISION, heart, PickupVariant.HEART); // 10
+}
+
 // PickupVariant.HEART (10)
-export function heart(
+function heart(
   pickup: EntityPickupHeart,
   collider: Entity,
   _low: boolean,

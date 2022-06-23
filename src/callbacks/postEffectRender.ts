@@ -1,7 +1,11 @@
-import { EffectVariant } from "isaac-typescript-definitions";
+import { EffectVariant, ModCallback } from "isaac-typescript-definitions";
 import { log } from "isaacscript-common";
 
-export function main(effect: EntityEffect): void {
+export function init(mod: Mod): void {
+  mod.AddCallback(ModCallback.POST_EFFECT_RENDER, main);
+}
+
+function main(effect: EntityEffect) {
   if (effect.Variant === EffectVariant.CREEP_SLIPPERY_BROWN) {
     log("Found slippery creep!");
     const creepData = effect.GetData();

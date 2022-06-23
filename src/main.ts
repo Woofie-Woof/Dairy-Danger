@@ -1,9 +1,4 @@
-import {
-  CacheFlag,
-  ItemType,
-  ModCallback,
-  PickupVariant,
-} from "isaac-typescript-definitions";
+import { ItemType } from "isaac-typescript-definitions";
 import { ModCallbackCustom, ModUpgraded, upgradeMod } from "isaacscript-common";
 import * as evaluateCache from "./callbacks/evaluateCache";
 import * as postEffectRender from "./callbacks/postEffectRender";
@@ -30,30 +25,14 @@ function main() {
 }
 
 function registerVanillaCallbacks(mod: Mod) {
-  mod.AddCallback(ModCallback.POST_PEFFECT_UPDATE, postPEffectUpdate.main); // 4
-  mod.AddCallback(
-    ModCallback.EVALUATE_CACHE,
-    evaluateCache.fireDelay,
-    CacheFlag.FIRE_DELAY,
-  ); // 8
-  mod.AddCallback(
-    ModCallback.POST_PICKUP_INIT,
-    postPickupInit.heart,
-    PickupVariant.HEART,
-  ); // 34
-  mod.AddCallback(
-    ModCallback.POST_PICKUP_RENDER,
-    postPickupRender.heart,
-    PickupVariant.HEART,
-  ); // 36
-  mod.AddCallback(
-    ModCallback.PRE_PICKUP_COLLISION,
-    prePickupCollision.heart,
-    PickupVariant.HEART,
-  ); // 38
-  mod.AddCallback(ModCallback.PRE_TEAR_COLLISION, preTearCollision.main); // 42
-  mod.AddCallback(ModCallback.POST_LASER_UPDATE, postLaserUpdate.main); // 48
-  mod.AddCallback(ModCallback.POST_EFFECT_RENDER, postEffectRender.main); // 56
+  postPEffectUpdate.init(mod); // 4
+  evaluateCache.init(mod); // 8
+  postPickupInit.init(mod); // 34
+  postPickupRender.init(mod); // 36
+  prePickupCollision.init(mod); // 38
+  preTearCollision.init(mod); // 42
+  postLaserUpdate.init(mod); // 48
+  postEffectRender.init(mod); // 56
 }
 
 function registerCustomCallbacks(mod: ModUpgraded) {

@@ -1,4 +1,12 @@
-import { EffectVariant, EntityType } from "isaac-typescript-definitions";
+import {
+  EffectVariant,
+  EntityType,
+  ModCallback,
+} from "isaac-typescript-definitions";
+
+export function init(mod: Mod): void {
+  mod.AddCallback(ModCallback.PRE_TEAR_COLLISION, main);
+}
 
 export function main(projectile: EntityTear, collider: Entity): void {
   const projectileData = projectile.GetData();

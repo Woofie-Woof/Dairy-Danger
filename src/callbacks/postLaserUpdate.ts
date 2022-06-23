@@ -1,7 +1,11 @@
-import { EntityType } from "isaac-typescript-definitions";
+import { EntityType, ModCallback } from "isaac-typescript-definitions";
 import * as droppedIceCream from "../items/droppedIceCream";
 
-export function main(laser: EntityLaser): void {
+export function init(mod: Mod): void {
+  mod.AddCallback(ModCallback.POST_LASER_UPDATE, main);
+}
+
+function main(laser: EntityLaser) {
   if (laser.FrameCount === 1) {
     const tearParent = laser.SpawnerEntity;
     if (tearParent !== undefined && tearParent.Type === EntityType.PLAYER) {

@@ -1,7 +1,7 @@
 <ItemPools>
   <Pool Name="treasure">
-    <Item Name="Probiotic Yogurt" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-    <Item Name="Dropped Ice Cream" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
-    <Item Name="Bob's Tea" Weight="1" DecreaseBy="1" RemoveOn="0.1"/>
+    <Item Name="Probiotic Yogurt" Weight="1" DecreaseBy="1" RemoveOn="0.1" />
+    <Item Name="Dropped Ice Cream" Weight="1" DecreaseBy="1" RemoveOn="0.1" />
+    <Item Name="Bob's Tea" Weight="1" DecreaseBy="1" RemoveOn="0.1" />
   </Pool>
 </ItemPools>

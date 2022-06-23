@@ -1,6 +1,11 @@
+import { CacheFlag, ModCallback } from "isaac-typescript-definitions";
 import { CollectibleTypeCustom } from "../constants";
 
 const MIN_FIRE_DELAY = 5;
+
+export function init(mod: Mod): void {
+  mod.AddCallback(ModCallback.EVALUATE_CACHE, fireDelay, CacheFlag.FIRE_DELAY); // 1 << 1
+}
 
 // CacheFlag.FIRE_DELAY (1 << 1)
 export function fireDelay(player: EntityPlayer): void {
