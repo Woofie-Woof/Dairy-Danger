@@ -2309,10 +2309,10 @@ isaac-typescript-definitions@^2.1.1:
   dependencies:
     lua-types "^2.11.0"
 
-isaacscript-common@^3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/isaacscript-common/-/isaacscript-common-3.6.0.tgz#69636ff04e2c5b39b2b4c067e572cdd85cbb8d8b"
-  integrity sha512-knP3gjJ9mx9qjuHwIF8qqnJ8Z1PxI9QDTLhxm6FC7Jme49SLsUKx/J9KnaGGqK+WnieBYhZs5PRfMdvSd4zLbg==
+isaacscript-common@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/isaacscript-common/-/isaacscript-common-3.7.0.tgz#0819c90b5a6ddaa643f100b67571a45813c28bff"
+  integrity sha512-HBcnQf3U0GsIS7/4ij4lrrJSydHQh9mgaq+TsNCS4yacO7wVM0cTftvsgoNwb414uU2EGh+ra4qbbrQu1lkyGA==
   dependencies:
     isaac-typescript-definitions "^2.1.1"
 
@@ -2350,10 +2350,10 @@ isaacscript-tsconfig@^1.1.17:
   resolved "https://registry.yarnpkg.com/isaacscript-tsconfig/-/isaacscript-tsconfig-1.1.17.tgz#784bc2b4318a3fdb096b596162281af6bbe6f3d9"
   integrity sha512-JgEPRQMStwhI30qo7RTS/34+B+1QiaB+NAat7KTdkdxdZNUFt9+uAGw2iNILNl3MV+w4g32UmXvYxoSw3R/kaw==
 
-isaacscript@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/isaacscript/-/isaacscript-2.5.0.tgz#d4b6f6501bec4e00f1a83a68d2e8eff0d4037158"
-  integrity sha512-+txfeFXXhNVaFigDEI2eb5rWyPDiVArWIdFJv3E1JlvqZiO7dDy0DEr/n9CUelvVOAgtEtW/4awKDBaBwqXLbg==
+isaacscript@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/isaacscript/-/isaacscript-2.5.2.tgz#e4a25e11f3a97d8631902e1ae35d99b8a9df5ea8"
+  integrity sha512-dPTq11KO0TItGrlfo+iJi+HM2mH0ItFMb9r10Iy1H9XasmoRKsaJhxDRONZcI44yG3AUuUsp9zcUwI2y60oFzQ==
   dependencies:
     chalk "4.1.2"
     command-exists "^1.2.9"
@@ -3734,19 +3734,19 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript-to-lua@1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/typescript-to-lua/-/typescript-to-lua-1.5.0.tgz#5522d83d959f7740e99229be893b292479055f1a"
-  integrity sha512-LIEh+oS+DPeSkhJ7EZz3wCE/LjsGGjskH7YhyFq4n6ct3X7/RdNwdv+voVzw+hdJAczXGV2orQXsePtJbKspcw==
+typescript-to-lua@1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/typescript-to-lua/-/typescript-to-lua-1.6.1.tgz#617f51d90e6e3e48b057a194c82a7d457407d2c9"
+  integrity sha512-ekF9U9GhfaoyJcBYiw4uHkT1I9d7Gcoo38N1Aiv/csylodwzNYnThUv/ae+aDhtSD8A4L6uwxMS/OJn5uLbohw==
   dependencies:
     enhanced-resolve "^5.8.2"
     resolve "^1.15.1"
     source-map "^0.7.3"
 
-typescript@4.6.4:
-  version "4.6.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.4.tgz#caa78bbc3a59e6a5c510d35703f6a09877ce45e9"
-  integrity sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==
+typescript@4.7.4:
+  version "4.7.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
+  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
