@@ -8,7 +8,7 @@ export function init(mod: Mod): void {
   mod.AddCallback(ModCallback.PRE_TEAR_COLLISION, main);
 }
 
-export function main(projectile: EntityTear, collider: Entity): void {
+function main(projectile: EntityTear, collider: Entity) {
   const projectileData = projectile.GetData();
   if (
     projectileData["iceCream"] !== undefined &&

@@ -1,6 +1,7 @@
 import { ModUpgraded, upgradeMod } from "isaacscript-common";
 import * as evaluateCache from "./callbacks/evaluateCache";
 import * as postEffectRender from "./callbacks/postEffectRender";
+import * as postItemPickup from "./callbacks/postItemPickup";
 import * as postLaserUpdate from "./callbacks/postLaserUpdate";
 import * as postPEffectUpdate from "./callbacks/postPEffectUpdate";
 import * as postPickupInit from "./callbacks/postPickupInit";
@@ -34,6 +35,7 @@ function registerVanillaCallbacks(mod: Mod) {
 }
 
 function registerCustomCallbacks(mod: ModUpgraded) {
+  postItemPickup.init(mod);
   postPlayerChangeHealth.init(mod);
   postRoomClearChanged.init(mod);
   postTearInitLate.init(mod);

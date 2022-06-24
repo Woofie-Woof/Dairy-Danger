@@ -8,7 +8,7 @@ export function init(mod: Mod): void {
 }
 
 // CacheFlag.FIRE_DELAY (1 << 1)
-export function fireDelay(player: EntityPlayer): void {
+function fireDelay(player: EntityPlayer) {
   if (player.MaxFireDelay > MIN_FIRE_DELAY) {
     const numDroppedIceCream = player.GetCollectibleNum(
       CollectibleTypeCustom.DROPPED_ICE_CREAM,

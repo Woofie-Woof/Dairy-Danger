@@ -24,7 +24,7 @@ export function postPickupInitHeart(heart: EntityPickupHeart): void {
   checkHasItem(heart);
 }
 
-export function checkHasItem(heart: EntityPickupHeart): void {
+function checkHasItem(heart: EntityPickupHeart) {
   if (anyPlayerHasCollectible(CollectibleTypeCustom.DARK_CHOCOLATE)) {
     changeHearts(heart);
   }
@@ -37,7 +37,7 @@ export function applyEffect(player: EntityPlayer): void {
   player.AddBlackHearts(playerRedHearts);
 }
 
-export function changeHearts(heart: EntityPickupHeart): void {
+function changeHearts(heart: EntityPickupHeart) {
   if (
     heart.SubType === HeartSubType.BLACK ||
     heart.SubType === HeartSubTypeCustom.HALF_BLACK

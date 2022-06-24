@@ -10,7 +10,7 @@ export function init(mod: Mod): void {
 }
 
 // PickupVariant.HEART (10)
-export function heartCallback(pickup: EntityPickup, _offset: Vector): void {
+function heartCallback(pickup: EntityPickup, _offset: Vector) {
   const heart = pickup as EntityPickupHeart;
 
   if (heart.SubType === HeartSubTypeCustom.HALF_BLACK) {
