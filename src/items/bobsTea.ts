@@ -4,7 +4,9 @@ import {
   TearFlag,
 } from "isaac-typescript-definitions";
 import { game, getRandomSeed, log, round } from "isaacscript-common";
-import { CollectibleTypeCustom, MAX_BOBS_TEA_BONUS } from "../constants";
+import { CollectibleTypeCustom } from "../enums/CollectibleTypeCustom";
+
+const MAX_BONUS = 1.5;
 
 if (EID !== undefined) {
   const itemDescription =
@@ -27,25 +29,36 @@ function applyEffect(player: EntityPlayer) {
   const playerData = player.GetData();
   const frameCount = game.GetFrameCount();
 
-  if (playerData["currentBobsTeaBonus"] === undefined)
+  if (playerData["currentBobsTeaBonus"] === undefined) {
     playerData["currentBobsTeaBonus"] = 0;
+  }
 
   playerData["currentStartDirection"] = -1;
-  if (Input.IsActionTriggered(ButtonAction.SHOOT_DOWN, player.ControllerIndex))
+  if (
+    Input.IsActionTriggered(ButtonAction.SHOOT_DOWN, player.ControllerIndex)
+  ) {
     playerData["currentStartDirection"] = ButtonAction.SHOOT_DOWN;
+  }
 
-  if (Input.IsActionTriggered(ButtonAction.SHOOT_UP, player.ControllerIndex))
+  if (Input.IsActionTriggered(ButtonAction.SHOOT_UP, player.ControllerIndex)) {
     playerData["currentStartDirection"] = ButtonAction.SHOOT_UP;
+  }
 
-  if (Input.IsActionTriggered(ButtonAction.SHOOT_LEFT, player.ControllerIndex))
+  if (
+    Input.IsActionTriggered(ButtonAction.SHOOT_LEFT, player.ControllerIndex)
+  ) {
     playerData["currentStartDirection"] = ButtonAction.SHOOT_LEFT;
+  }
 
-  if (Input.IsActionTriggered(ButtonAction.SHOOT_RIGHT, player.ControllerIndex))
+  if (
+    Input.IsActionTriggered(ButtonAction.SHOOT_RIGHT, player.ControllerIndex)
+  ) {
     playerData["currentStartDirection"] = ButtonAction.SHOOT_RIGHT;
+  }
 
   if (playerData["currentStartDirection"] !== -1) {
     if (
-      Number(playerData["currentBobsTeaBonus"]) === MAX_BOBS_TEA_BONUS &&
+      Number(playerData["currentBobsTeaBonus"]) === MAX_BONUS &&
       playerData["currentStartDirection"] ===
         playerData["lastStartDirection"] &&
       frameCount - Number(playerData["lastStartPress"]) <= 20
@@ -57,8 +70,9 @@ function applyEffect(player: EntityPlayer) {
       player.EvaluateItems();
     }
 
-    if (playerData["currentBobsTeaBonus"] === 0)
+    if (playerData["currentBobsTeaBonus"] === 0) {
       playerData["startShoot"] = frameCount;
+    }
 
     playerData["lastStartPress"] = frameCount;
     playerData["lastShootFrame"] = frameCount;
@@ -70,8 +84,9 @@ function applyEffect(player: EntityPlayer) {
     Input.IsActionPressed(ButtonAction.SHOOT_UP, player.ControllerIndex) ||
     Input.IsActionPressed(ButtonAction.SHOOT_LEFT, player.ControllerIndex) ||
     Input.IsActionPressed(ButtonAction.SHOOT_RIGHT, player.ControllerIndex)
-  )
+  ) {
     playerData["lastShootFrame"] = frameCount;
+  }
 
   if (
     playerData["startShoot"] !== undefined &&
@@ -82,7 +97,7 @@ function applyEffect(player: EntityPlayer) {
       playerData["startShoot"] = frameCount;
       player.AddCacheFlags(CacheFlag.FIRE_DELAY);
       player.EvaluateItems();
-    } else if (Number(playerData["currentBobsTeaBonus"]) < MAX_BOBS_TEA_BONUS) {
+    } else if (Number(playerData["currentBobsTeaBonus"]) < MAX_BONUS) {
       const previousBonus = playerData["currentBobsTeaBonus"];
       playerData["currentBobsTeaBonus"] =
         round(((frameCount - Number(playerData["startShoot"])) / 90) * 2) / 2;

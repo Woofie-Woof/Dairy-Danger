@@ -1,5 +1,5 @@
 import { ModCallback, PickupVariant } from "isaac-typescript-definitions";
-import { HeartSubTypeCustom } from "../constants";
+import { HeartSubTypeCustom } from "../enums/HeartSubTypeCustom";
 
 export function init(mod: Mod): void {
   mod.AddCallback(

@@ -1,14 +1,15 @@
 import { EffectVariant, EntityType } from "isaac-typescript-definitions";
 import { game, VectorZero } from "isaacscript-common";
-import { TrinketTypeCustom } from "../constants";
+import { TrinketTypeCustom } from "../enums/TrinketTypeCustom";
 
 export function postPEffectUpdate(player: EntityPlayer): void {
   checkHasTrinket(player);
 }
 
 function checkHasTrinket(player: EntityPlayer) {
-  if (player.HasTrinket(TrinketTypeCustom.LACTOSE_INTOLERANCE))
+  if (player.HasTrinket(TrinketTypeCustom.LACTOSE_INTOLERANCE)) {
     applyEffect(player);
+  }
 }
 
 function applyEffect(player: EntityPlayer) {

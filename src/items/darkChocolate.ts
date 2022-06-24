@@ -4,7 +4,8 @@ import {
   HealthType,
   spawnHeart,
 } from "isaacscript-common";
-import { CollectibleTypeCustom, HeartSubTypeCustom } from "../constants";
+import { CollectibleTypeCustom } from "../enums/CollectibleTypeCustom";
+import { HeartSubTypeCustom } from "../enums/HeartSubTypeCustom";
 
 const HEART_CONVERSION_MAP = new Map<HeartSubType, HeartSubType>([
   [HeartSubType.FULL, HeartSubType.BLACK],
@@ -80,8 +81,9 @@ function changeHealthUp(
   difference: int,
   healthType: HealthType,
 ) {
-  if (healthType === HealthType.MAX_HEARTS)
+  if (healthType === HealthType.MAX_HEARTS) {
     player.AddMaxHearts(difference * -1, true);
+  }
 
   if (healthType === HealthType.BONE) {
     player.AddBoneHearts(difference * -1);

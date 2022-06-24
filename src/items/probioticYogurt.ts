@@ -4,8 +4,8 @@ import {
   RoomType,
   SoundEffect,
 } from "isaac-typescript-definitions";
-import { game, spawnGridWithVariant } from "isaacscript-common";
-import { CollectibleTypeCustom } from "../constants";
+import { game, sfxManager, spawnGridWithVariant } from "isaacscript-common";
+import { CollectibleTypeCustom } from "../enums/CollectibleTypeCustom";
 
 if (EID !== undefined) {
   const itemDescription =
@@ -51,5 +51,5 @@ function applyEffect(player: EntityPlayer) {
     room.GetGridIndex(playerPos),
   );
 
-  SFXManager().Play(SoundEffect.FART);
+  sfxManager.Play(SoundEffect.FART);
 }

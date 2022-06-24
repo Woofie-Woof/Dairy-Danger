@@ -1,5 +1,5 @@
 import { CacheFlag, ModCallback } from "isaac-typescript-definitions";
-import { CollectibleTypeCustom } from "../constants";
+import { CollectibleTypeCustom } from "../enums/CollectibleTypeCustom";
 
 const MIN_FIRE_DELAY = 5;
 

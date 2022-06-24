@@ -1,29 +1,9 @@
-import {
-  CollectibleType,
-  HeartSubType,
-  TrinketType,
-} from "isaac-typescript-definitions";
-
-export const CollectibleTypeCustom = {
-  PROBIOTIC_YOGURT: Isaac.GetItemIdByName("Probiotic Yogurt"),
-  DROPPED_ICE_CREAM: Isaac.GetItemIdByName("Dropped Ice Cream"),
-  BOBS_TEA: Isaac.GetItemIdByName("Bob's Tea"),
-  DARK_CHOCOLATE: Isaac.GetItemIdByName("Dark Chocolate"),
-} as const;
-
-export const TrinketTypeCustom = {
-  LACTOSE_INTOLERANCE: Isaac.GetTrinketIdByName("Lactose Intolerance"),
-} as const;
-
-export const HeartSubTypeCustom = {
-  HALF_BLACK: 1422 as HeartSubType,
-} as const;
-
-export const MAX_BOBS_TEA_BONUS = 1.5;
+import { CollectibleType, TrinketType } from "isaac-typescript-definitions";
+import { CollectibleTypeCustom } from "./enums/CollectibleTypeCustom";
 
 export const MOD_NAME = "Dairy-Danger";
 
-export const MILK_ITEM_IDS = [
+export const MILK_COLLECTIBLE_TYPE_SET: ReadonlySet<CollectibleType> = new Set([
   CollectibleType.MILK,
   CollectibleType.SOY_MILK,
   CollectibleType.ALMOND_MILK,
@@ -34,6 +14,9 @@ export const MILK_ITEM_IDS = [
   CollectibleTypeCustom.DROPPED_ICE_CREAM,
   CollectibleTypeCustom.BOBS_TEA,
   CollectibleTypeCustom.DARK_CHOCOLATE,
-];
+]);
 
-export const MILK_TRINKET_IDS = [TrinketType.BUTTER, TrinketType.WALNUT];
+export const MILK_TRINKET_TYPE_SET: ReadonlySet<TrinketType> = new Set([
+  TrinketType.BUTTER,
+  TrinketType.WALNUT,
+]);

@@ -1,6 +1,6 @@
 import { ItemType } from "isaac-typescript-definitions";
 import { ModCallbackCustom, ModUpgraded } from "isaacscript-common";
-import { CollectibleTypeCustom } from "../constants";
+import { CollectibleTypeCustom } from "../enums/CollectibleTypeCustom";
 import * as dc from "../items/darkChocolate";
 
 export function init(mod: ModUpgraded): void {

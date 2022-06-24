@@ -1,6 +1,6 @@
 import { EntityType } from "isaac-typescript-definitions";
 import { getPlayerFromTear, getRandomSeed } from "isaacscript-common";
-import { CollectibleTypeCustom } from "../constants";
+import { CollectibleTypeCustom } from "../enums/CollectibleTypeCustom";
 
 if (EID !== undefined) {
   const itemDescription =
@@ -35,8 +35,9 @@ export function checkHasItem(tear: Entity, player: EntityPlayer): void {
 
 function applyEffect(tear: Entity, player: EntityPlayer, rng: RNG) {
   let velocity = tear.Velocity;
-  if (tear.Type === EntityType.LASER)
+  if (tear.Type === EntityType.LASER) {
     velocity = player.GetShootingInput().mul(player.ShotSpeed * 10);
+  }
   const firedTear = player.FireTear(
     player.Position,
     velocity,
@@ -58,6 +59,8 @@ function applyEffect(tear: Entity, player: EntityPlayer, rng: RNG) {
     tearData["iceCream"] = true;
     const colorIndex = rng.RandomInt(3);
     const color = colors[colorIndex];
-    if (color !== undefined) firedTear.SetColor(color, 0, 1);
+    if (color !== undefined) {
+      firedTear.SetColor(color, 0, 1);
+    }
   }
 }
