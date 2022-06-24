@@ -1416,10 +1416,10 @@ eslint-config-airbnb-typescript@^17.0.0:
   dependencies:
     eslint-config-airbnb-base "^15.0.0"
 
-eslint-config-isaacscript@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-isaacscript/-/eslint-config-isaacscript-1.3.2.tgz#21e1dc28249ac6679ece2f14763d15850c43b86a"
-  integrity sha512-3Yxwz1uHol+zCTYNXVQ32+pBOb5YqK2wV7NNILZPB0Uof/nA1c+61AvkYc56wY2a93txmOOApb2z9zxIU9CVww==
+eslint-config-isaacscript@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-isaacscript/-/eslint-config-isaacscript-2.0.0.tgz#e9b4f58e78cee2097eed6e46d7729834adb65e62"
+  integrity sha512-UzpI9xhlvpf2EbDE0rXbZqNIcFjEMSu/JbajLiHYCInQLpyUQtSNojUF2kZychom3Yz4kYRDFTt7mEOWAw2Ljg==
 
 eslint-config-prettier@^8.5.0:
   version "8.5.0"
@@ -1469,10 +1469,10 @@ eslint-plugin-import@^2.26.0:
     resolve "^1.22.0"
     tsconfig-paths "^3.14.1"
 
-eslint-plugin-isaacscript@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-isaacscript/-/eslint-plugin-isaacscript-1.4.2.tgz#8528f366dc16fd18d92c281927f90e2198217404"
-  integrity sha512-ZhKQyRnTXtSClxAltMdn/SB7p7Mfc8TDsddEe+EKt8XGcI8aBFQVL5UREQ9H/PAf86nV6cvmGBTuV7S31gNeOg==
+eslint-plugin-isaacscript@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-isaacscript/-/eslint-plugin-isaacscript-1.4.3.tgz#f541b93fc6b17c1e75728705ba4275b4b538dbcf"
+  integrity sha512-sh5yqPmzxr5wrXpWzDgJUNBIt7N9qERjlf5yDo7BPPVphjLNZqI6AArK9bx8KiaNE6seUr7F8367HAK+QN46MQ==
   dependencies:
     tslib "^2.4.0"
 
@@ -2302,24 +2302,24 @@ is-yarn-global@^0.3.0:
   resolved "https://registry.yarnpkg.com/is-yarn-global/-/is-yarn-global-0.3.0.tgz#d502d3382590ea3004893746754c89139973e232"
   integrity sha512-VjSeb/lHmkoyd8ryPVIKvOCn4D1koMqY+vqyjjUfc3xyKtP4dYOxM44sZrnqQSzSds3xyOrUTLTC9LVCVgLngw==
 
-isaac-typescript-definitions@^2.0.60:
-  version "2.0.60"
-  resolved "https://registry.yarnpkg.com/isaac-typescript-definitions/-/isaac-typescript-definitions-2.0.60.tgz#803609da995b16b4f0465b823a458dfc80ded6a5"
-  integrity sha512-FPllNCD1/nw/I78oXomEibFe9rGLZPdiyaIaVQvaHaZLdpxM1VelmxOH2kj7KLXU6OZPN/50juErIRcCZ8+k3w==
+isaac-typescript-definitions@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/isaac-typescript-definitions/-/isaac-typescript-definitions-2.1.1.tgz#5fe1a678d8f0461092398f8e5b6076bd2215486b"
+  integrity sha512-fZ8oczd43vvjSOsKCZJIk0ShhdKujcRwrSxR5FjXh+xiyry2ZZbsUX6Py3aLYs5TPgw2xg/9sIf7TDTfzlTGnQ==
   dependencies:
     lua-types "^2.11.0"
 
-isaacscript-common@^3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/isaacscript-common/-/isaacscript-common-3.5.1.tgz#9c422f7305919e5b2d694fcdbc18a4c647d3fd68"
-  integrity sha512-tcI7e3wlse4uGihRJCUygdsUgEmcUbUrrSm74BleChnbNIZbj75JktU90uFYu3jqXRJBUB7uqck+fSviPK3tNw==
+isaacscript-common@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/isaacscript-common/-/isaacscript-common-3.6.0.tgz#69636ff04e2c5b39b2b4c067e572cdd85cbb8d8b"
+  integrity sha512-knP3gjJ9mx9qjuHwIF8qqnJ8Z1PxI9QDTLhxm6FC7Jme49SLsUKx/J9KnaGGqK+WnieBYhZs5PRfMdvSd4zLbg==
   dependencies:
-    isaac-typescript-definitions "^2.0.60"
+    isaac-typescript-definitions "^2.1.1"
 
-isaacscript-lint@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/isaacscript-lint/-/isaacscript-lint-1.2.5.tgz#ecea31b5ce0b9f01310ac37701864912fadc6012"
-  integrity sha512-EgqPcgr3exxSmiOpDRcJccGiGimgU9sTa+oF5s0Y6cDDCc0Na5bVLf1VUXancxnM93HQOglDgSxaoMFWj/wpFg==
+isaacscript-lint@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/isaacscript-lint/-/isaacscript-lint-2.0.1.tgz#ab848e195432ccb1865eb31bfb2921caaa156023"
+  integrity sha512-FNiRtMYioevT8J/LGAurHW4KJOyVO00GAQRsYmqUUuaFwrLbG3N9LP515O+FZMHJs+2YSVy3B+NkPnaTc1ZMiQ==
   dependencies:
     "@prettier/plugin-xml" "^2.2.0"
     "@typescript-eslint/eslint-plugin" "^5.29.0"
@@ -2328,11 +2328,11 @@ isaacscript-lint@^1.2.5:
     eslint "^8.18.0"
     eslint-config-airbnb-base "^15.0.0"
     eslint-config-airbnb-typescript "^17.0.0"
-    eslint-config-isaacscript "^1.3.2"
+    eslint-config-isaacscript "^2.0.0"
     eslint-config-prettier "^8.5.0"
     eslint-plugin-eslint-comments "^3.2.0"
     eslint-plugin-import "^2.26.0"
-    eslint-plugin-isaacscript "^1.4.2"
+    eslint-plugin-isaacscript "^1.4.3"
     eslint-plugin-jsdoc "^39.3.3"
     eslint-plugin-only-warn "^1.0.3"
     eslint-plugin-sort-exports "^0.6.0"
@@ -2350,12 +2350,11 @@ isaacscript-tsconfig@^1.1.17:
   resolved "https://registry.yarnpkg.com/isaacscript-tsconfig/-/isaacscript-tsconfig-1.1.17.tgz#784bc2b4318a3fdb096b596162281af6bbe6f3d9"
   integrity sha512-JgEPRQMStwhI30qo7RTS/34+B+1QiaB+NAat7KTdkdxdZNUFt9+uAGw2iNILNl3MV+w4g32UmXvYxoSw3R/kaw==
 
-isaacscript@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/isaacscript/-/isaacscript-2.4.0.tgz#52db76b91ffecda67c4c839d9f3295419b0eca57"
-  integrity sha512-lvn8obi3++E36y6NG4Khw99axFeYp2EqQW4li8eEQb2BBWixQRD8eSddWANAmXe0tE/TRyoi1++MeTMX7IVM8Q==
+isaacscript@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/isaacscript/-/isaacscript-2.5.0.tgz#d4b6f6501bec4e00f1a83a68d2e8eff0d4037158"
+  integrity sha512-+txfeFXXhNVaFigDEI2eb5rWyPDiVArWIdFJv3E1JlvqZiO7dDy0DEr/n9CUelvVOAgtEtW/4awKDBaBwqXLbg==
   dependencies:
-    "@types/node" "^18.0.0"
     chalk "4.1.2"
     command-exists "^1.2.9"
     dotenv "^16.0.1"
@@ -2365,14 +2364,12 @@ isaacscript@^2.4.0:
     isaacscript-tsconfig "^1.1.17"
     jsonc-parser "^3.0.0"
     moment "^2.29.3"
-    npm-check-updates "^14.0.1"
+    npm-check-updates "^14.1.1"
     prompt "^1.3.0"
     source-map-support "^0.5.21"
-    sync-directory "5.0.8"
+    sync-directory "^5.1.7"
     tslib "^2.4.0"
-    typescript "^4.7.4"
-    typescript-to-lua "^1.6.0"
-    update-notifier "^5.1.0"
+    update-notifier "5.1.0"
     yaml "^2.1.1"
     yargs "^17.5.1"
 
@@ -2785,7 +2782,7 @@ npm-bundled@^1.1.1, npm-bundled@^1.1.2:
   dependencies:
     npm-normalize-package-bin "^1.0.1"
 
-npm-check-updates@^14.0.1:
+npm-check-updates@^14.1.1:
   version "14.1.1"
   resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-14.1.1.tgz#26ffb56d32699cfaf7396f962440b0d62a58f9fc"
   integrity sha512-lVGckd/SR9lpCPV3WhY/LbhqQRV6V7jYkN5wSp49P+ER2xCgKGewE1i5kSCBBnNG91tcQo9CfBGhX1KY9t7DCg==
@@ -3597,10 +3594,10 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-sync-directory@5.0.8:
-  version "5.0.8"
-  resolved "https://registry.yarnpkg.com/sync-directory/-/sync-directory-5.0.8.tgz#ff6dbc6c5bf2335cbeef66afbb60e17478846376"
-  integrity sha512-MuJI9Gtk3ZzSTCgj2rRB/mxSf+VBIza+d7ze/3rxVsqorN23QRtBC+nfhuTmLeLeWAcWB1D0NSWwrpCll3Siig==
+sync-directory@^5.1.7:
+  version "5.1.7"
+  resolved "https://registry.yarnpkg.com/sync-directory/-/sync-directory-5.1.7.tgz#dcea109ccfd4d22b2eafd1a15eb39e160284bc60"
+  integrity sha512-h7EzYFXFn8phbi0egftJhFfJI85uDqG0DJ0cCru9KFRMY81ReYAHRvf3VihDolq0qblVeCX91MkbmtU+g2Z6ag==
   dependencies:
     chokidar "^3.3.1"
     commander "^6.2.0"
@@ -3746,24 +3743,10 @@ typescript-to-lua@1.5.0:
     resolve "^1.15.1"
     source-map "^0.7.3"
 
-typescript-to-lua@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/typescript-to-lua/-/typescript-to-lua-1.6.0.tgz#3f702a4e0b6befadb62e916d38acb43800c83fb8"
-  integrity sha512-s0MWAMnjl2h0qzf02/iULHCFdv3k4Qvj9gAA7nejjPbeHg+paYJZ/MwOrk7n2+gQkztGhJxCE15J9KIv6oIIIw==
-  dependencies:
-    enhanced-resolve "^5.8.2"
-    resolve "^1.15.1"
-    source-map "^0.7.3"
-
 typescript@4.6.4:
   version "4.6.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.4.tgz#caa78bbc3a59e6a5c510d35703f6a09877ce45e9"
   integrity sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==
-
-typescript@^4.7.4:
-  version "4.7.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
-  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
@@ -3811,7 +3794,7 @@ universalify@^2.0.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.0.tgz#75a4984efedc4b08975c5aeb73f530d02df25717"
   integrity sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==
 
-update-notifier@^5.1.0:
+update-notifier@5.1.0, update-notifier@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/update-notifier/-/update-notifier-5.1.0.tgz#4ab0d7c7f36a231dd7316cf7729313f0214d9ad9"
   integrity sha512-ItnICHbeMh9GqUy31hFPrD1kcuZ3rpxDZbf4KUDavXwS0bW5m7SLbDQpGX3UYr072cbrF5hFUs3r5tUsPwjfHw==

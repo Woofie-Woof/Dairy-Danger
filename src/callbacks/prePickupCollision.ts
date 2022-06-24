@@ -14,27 +14,30 @@ import {
 import { HeartSubTypeCustom } from "../constants";
 
 export function init(mod: Mod): void {
-  mod.AddCallback(ModCallback.PRE_PICKUP_COLLISION, heart, PickupVariant.HEART); // 10
+  mod.AddCallback(
+    ModCallback.PRE_PICKUP_COLLISION,
+    heartCallback,
+    PickupVariant.HEART, // 10
+  );
 }
 
 // PickupVariant.HEART (10)
-function heart(
-  pickup: EntityPickupHeart,
+function heartCallback(
+  pickup: EntityPickup,
   collider: Entity,
   _low: boolean,
 ): boolean | void {
-  if (pickup.SubType === HeartSubTypeCustom.HALF_BLACK) {
-    return halfBlack(pickup, collider);
+  const heart = pickup as EntityPickupHeart;
+
+  if (heart.SubType === HeartSubTypeCustom.HALF_BLACK) {
+    return halfBlack(heart, collider);
   }
 
   return undefined;
 }
 
 // HeartSubTypeCustom.HALF_BLACK
-function halfBlack(
-  pickup: EntityPickupHeart,
-  collider: Entity,
-): boolean | void {
+function halfBlack(heart: EntityPickupHeart, collider: Entity): boolean | void {
   if (collider.Type !== EntityType.PLAYER) {
     return undefined;
   }
@@ -45,7 +48,7 @@ function halfBlack(
   }
 
   const character = player.GetPlayerType();
-  const sprite = pickup.GetSprite();
+  const sprite = heart.GetSprite();
   const maxHearts = player.GetMaxHearts();
   const soulHearts = player.GetSoulHearts();
 
@@ -62,8 +65,8 @@ function halfBlack(
 
     sfxManager.Play(SoundEffect.UNHOLY);
     sprite.Play("Collect", true);
-    pickup.AddEntityFlags(EntityFlag.NO_KNOCKBACK);
-    pickup.AddEntityFlags(EntityFlag.NO_PHYSICS_KNOCKBACK);
+    heart.AddEntityFlags(EntityFlag.NO_KNOCKBACK);
+    heart.AddEntityFlags(EntityFlag.NO_PHYSICS_KNOCKBACK);
   }
 
   return true;
