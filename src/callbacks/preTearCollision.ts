@@ -3,6 +3,7 @@ import {
   EntityType,
   ModCallback,
 } from "isaac-typescript-definitions";
+import { VectorZero } from "isaacscript-common";
 
 export function init(mod: Mod): void {
   mod.AddCallback(ModCallback.PRE_TEAR_COLLISION, main);
@@ -21,7 +22,7 @@ function main(projectile: EntityTear, collider: Entity) {
       EffectVariant.CREEP_SLIPPERY_BROWN,
       0,
       collider.Position,
-      Vector.Zero,
+      VectorZero,
       undefined,
     );
 

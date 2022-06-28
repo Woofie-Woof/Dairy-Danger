@@ -1,18 +1,45 @@
 import { EffectVariant, EntityType } from "isaac-typescript-definitions";
-import { game, VectorZero } from "isaacscript-common";
+import {
+  DefaultMap,
+  game,
+  getPlayerIndex,
+  PlayerIndex,
+  saveDataManager,
+  VectorZero,
+} from "isaacscript-common";
 import { TrinketTypeCustom } from "../enums/TrinketTypeCustom";
+
+class MilkPlayerData {
+  milkCollectibles = 0;
+}
+
+const v = {
+  run: {
+    milkPlayerData: new DefaultMap<PlayerIndex, MilkPlayerData>(
+      () => new MilkPlayerData(),
+    ),
+  },
+};
+
+saveDataManager("milkCollectible", v);
 
 export function postPEffectUpdate(player: EntityPlayer): void {
   checkHasTrinket(player);
 }
 
 function checkHasTrinket(player: EntityPlayer) {
-  if (player.HasTrinket(TrinketTypeCustom.LACTOSE_INTOLERANCE)) {
-    applyEffect(player);
+  const playerIndex = getPlayerIndex(player);
+  const data = v.run.milkPlayerData.getAndSetDefault(playerIndex);
+
+  if (
+    player.HasTrinket(TrinketTypeCustom.LACTOSE_INTOLERANCE) &&
+    data.milkCollectibles > 0
+  ) {
+    applyEffect(player, data);
   }
 }
 
-function applyEffect(player: EntityPlayer) {
+function applyEffect(player: EntityPlayer, data: MilkPlayerData) {
   const frameCount = game.GetFrameCount();
 
   if (frameCount % 10 === 0) {
@@ -26,7 +53,7 @@ function applyEffect(player: EntityPlayer) {
     ).ToEffect();
 
     if (creep !== undefined) {
-      creep.CollisionDamage = 3.5;
+      creep.CollisionDamage = 2.5 + 1 * data.milkCollectibles;
     }
   }
 }
