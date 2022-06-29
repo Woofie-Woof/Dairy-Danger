@@ -7,6 +7,8 @@ import * as postPEffectUpdate from "./callbacks/postPEffectUpdate";
 import * as postPickupInit from "./callbacks/postPickupInit";
 import * as postPickupRender from "./callbacks/postPickupRender";
 import * as postPlayerChangeHealth from "./callbacks/postPlayerChangeHealth";
+import * as postPlayerCollectibleAdded from "./callbacks/postPlayerCollectibleAdded";
+import * as postPlayerCollectibleRemoved from "./callbacks/postPlayerCollectibleRemoved";
 import * as postRoomClearChanged from "./callbacks/postRoomClearChanged";
 import * as postTearInitLate from "./callbacks/postTearInitLate";
 import * as prePickupCollision from "./callbacks/prePickupCollision";
@@ -39,4 +41,6 @@ function registerCustomCallbacks(mod: ModUpgraded) {
   postPlayerChangeHealth.init(mod);
   postRoomClearChanged.init(mod);
   postTearInitLate.init(mod);
+  postPlayerCollectibleAdded.init(mod);
+  postPlayerCollectibleRemoved.init(mod);
 }

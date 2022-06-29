@@ -27,6 +27,13 @@ export function postPEffectUpdate(player: EntityPlayer): void {
   checkHasTrinket(player);
 }
 
+export function changeMilkCounter(player: EntityPlayer, amount: int): void {
+  const playerIndex = getPlayerIndex(player);
+  const data = v.run.milkPlayerData.getAndSetDefault(playerIndex);
+
+  data.milkCollectibles += amount;
+}
+
 function checkHasTrinket(player: EntityPlayer) {
   const playerIndex = getPlayerIndex(player);
   const data = v.run.milkPlayerData.getAndSetDefault(playerIndex);
