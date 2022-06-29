@@ -21,7 +21,9 @@ const v = {
   },
 };
 
-saveDataManager("milkCollectible", v);
+export function init(): void {
+  saveDataManager("milkCollectible", v);
+}
 
 export function postPEffectUpdate(player: EntityPlayer): void {
   checkHasTrinket(player);

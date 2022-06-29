@@ -14,6 +14,7 @@ import * as postTearInitLate from "./callbacks/postTearInitLate";
 import * as prePickupCollision from "./callbacks/prePickupCollision";
 import * as preTearCollision from "./callbacks/preTearCollision";
 import { MOD_NAME } from "./constants";
+import * as lactoseIntolerance from "./trinkets/lactoseIntolerance";
 
 main();
 
@@ -21,6 +22,7 @@ function main() {
   const modVanilla = RegisterMod(MOD_NAME, 1);
   const mod = upgradeMod(modVanilla);
 
+  initSaveDataManager();
   registerVanillaCallbacks(mod);
   registerCustomCallbacks(mod);
 }
@@ -43,4 +45,8 @@ function registerCustomCallbacks(mod: ModUpgraded) {
   postTearInitLate.init(mod);
   postPlayerCollectibleAdded.init(mod);
   postPlayerCollectibleRemoved.init(mod);
+}
+
+function initSaveDataManager() {
+  lactoseIntolerance.init();
 }
