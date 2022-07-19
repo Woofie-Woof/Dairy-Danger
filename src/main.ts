@@ -1,6 +1,6 @@
 import { ModUpgraded, upgradeMod } from "isaacscript-common";
 import * as evaluateCache from "./callbacks/evaluateCache";
-import * as postEffectRender from "./callbacks/postEffectRender";
+import * as postEffectInit from "./callbacks/postEffectInit";
 import * as postItemPickup from "./callbacks/postItemPickup";
 import * as postLaserUpdate from "./callbacks/postLaserUpdate";
 import * as postPEffectUpdate from "./callbacks/postPEffectUpdate";
@@ -35,7 +35,7 @@ function registerVanillaCallbacks(mod: Mod) {
   prePickupCollision.init(mod); // 38
   preTearCollision.init(mod); // 42
   postLaserUpdate.init(mod); // 48
-  postEffectRender.init(mod); // 56
+  postEffectInit.init(mod); // 56
 }
 
 function registerCustomCallbacks(mod: ModUpgraded) {

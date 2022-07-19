@@ -17,10 +17,7 @@ export function checkHasItem(): void {
   const numPlayers = game.GetNumPlayers();
   for (let i = 0; i < numPlayers; i++) {
     const player = Isaac.GetPlayer(i);
-    if (
-      player !== undefined &&
-      player.HasCollectible(CollectibleTypeCustom.PROBIOTIC_YOGURT)
-    ) {
+    if (player.HasCollectible(CollectibleTypeCustom.PROBIOTIC_YOGURT)) {
       applyEffect(player);
     }
   }

@@ -1,17 +1,14 @@
-import { EffectVariant, EntityType } from "isaac-typescript-definitions";
+import { EffectVariant } from "isaac-typescript-definitions";
 import {
   DefaultMap,
   game,
   getPlayerIndex,
   PlayerIndex,
   saveDataManager,
-  VectorZero,
+  spawnEffect,
 } from "isaacscript-common";
+import { MilkPlayerData } from "../classes/MilkPlayerData";
 import { TrinketTypeCustom } from "../enums/TrinketTypeCustom";
-
-class MilkPlayerData {
-  milkCollectibles = 0;
-}
 
 const v = {
   run: {
@@ -51,18 +48,20 @@ function checkHasTrinket(player: EntityPlayer) {
 function applyEffect(player: EntityPlayer, data: MilkPlayerData) {
   const frameCount = game.GetFrameCount();
 
-  if (frameCount % 10 === 0) {
-    const creep = Isaac.Spawn(
-      EntityType.EFFECT,
-      EffectVariant.CREEP_RED,
+  if (frameCount % 5 === 0) {
+    const creep = spawnEffect(
+      EffectVariant.PLAYER_CREEP_RED,
       0,
       player.Position,
-      VectorZero,
-      player,
-    ).ToEffect();
+    );
 
-    if (creep !== undefined) {
-      creep.CollisionDamage = 2.5 + 1 * data.milkCollectibles;
-    }
+    creep.CollisionDamage = 2.5 + 1 * data.milkCollectibles;
   }
+}
+
+export function changeCreepColor(effect: EntityEffect): void {
+  const newCreepColor = Color(1, 1, 1);
+  newCreepColor.SetColorize(0.75 * 4, 0.5 * 4, 0.2 * 4, 1);
+  const creepSprite = effect.GetSprite();
+  creepSprite.Color = newCreepColor;
 }

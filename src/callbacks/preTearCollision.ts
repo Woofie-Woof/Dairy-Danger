@@ -3,13 +3,13 @@ import {
   EntityType,
   ModCallback,
 } from "isaac-typescript-definitions";
-import { VectorZero } from "isaacscript-common";
+import { spawnEffect } from "isaacscript-common";
 
 export function init(mod: Mod): void {
   mod.AddCallback(ModCallback.PRE_TEAR_COLLISION, main);
 }
 
-function main(projectile: EntityTear, collider: Entity) {
+function main(projectile: EntityTear, collider: Entity): boolean | undefined {
   const projectileData = projectile.GetData();
   if (
     projectileData["iceCream"] !== undefined &&
@@ -17,13 +17,10 @@ function main(projectile: EntityTear, collider: Entity) {
     collider.Type !== EntityType.FAMILIAR &&
     collider.Type !== EntityType.PLAYER
   ) {
-    const creep = Isaac.Spawn(
-      EntityType.EFFECT,
+    const creep = spawnEffect(
       EffectVariant.CREEP_SLIPPERY_BROWN,
       0,
       collider.Position,
-      VectorZero,
-      undefined,
     );
 
     const creepData = creep.GetData();
@@ -33,5 +30,7 @@ function main(projectile: EntityTear, collider: Entity) {
     creepData["iceCreamR"] = iceCreamColor.R;
     creepData["iceCreamG"] = iceCreamColor.G;
     creepData["iceCreamB"] = iceCreamColor.B;
+
+    return undefined;
   }
 }

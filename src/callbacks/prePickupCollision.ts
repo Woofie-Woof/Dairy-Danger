@@ -26,7 +26,7 @@ function heartCallback(
   pickup: EntityPickup,
   collider: Entity,
   _low: boolean,
-): boolean | void {
+): boolean | undefined {
   const heart = pickup as EntityPickupHeart;
 
   if (heart.SubType === HeartSubTypeCustom.HALF_BLACK) {
@@ -37,7 +37,10 @@ function heartCallback(
 }
 
 // HeartSubTypeCustom.HALF_BLACK
-function halfBlack(heart: EntityPickupHeart, collider: Entity): boolean | void {
+function halfBlack(
+  heart: EntityPickupHeart,
+  collider: Entity,
+): boolean | undefined {
   if (collider.Type !== EntityType.PLAYER) {
     return undefined;
   }

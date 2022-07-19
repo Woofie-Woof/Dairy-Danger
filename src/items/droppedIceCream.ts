@@ -25,7 +25,6 @@ export function checkHasItem(tear: Entity, player: EntityPlayer): void {
 
   if (
     tearData["iceCream"] === undefined &&
-    player !== undefined &&
     player.HasCollectible(CollectibleTypeCustom.DROPPED_ICE_CREAM) &&
     rng.RandomInt(101) <= 10
   ) {
@@ -48,19 +47,38 @@ function applyEffect(tear: Entity, player: EntityPlayer, rng: RNG) {
     1.5,
   );
 
-  if (firedTear !== undefined) {
-    const colors = [
-      Color(0.62, 0.81, 0.56),
-      Color(0.95, 0.81, 0.64),
-      Color(0.51, 0.33, 0.27),
-    ];
+  const colors = [
+    Color(0.62, 0.81, 0.56),
+    Color(0.95, 0.81, 0.64),
+    Color(0.51, 0.33, 0.27),
+  ];
 
-    const tearData = firedTear.GetData();
-    tearData["iceCream"] = true;
-    const colorIndex = rng.RandomInt(3);
-    const color = colors[colorIndex];
-    if (color !== undefined) {
-      firedTear.SetColor(color, 0, 1);
-    }
+  const tearData = firedTear.GetData();
+  tearData["iceCream"] = true;
+  const colorIndex = rng.RandomInt(3);
+  const color = colors[colorIndex];
+  if (color !== undefined) {
+    firedTear.SetColor(color, 0, 1);
+  }
+}
+
+export function changeCreepColor(effect: EntityEffect): void {
+  const creepData = effect.GetData();
+  if (
+    creepData["iceCream"] !== undefined &&
+    creepData["iceCream"] === true &&
+    typeof creepData["iceCreamR"] === "number" &&
+    typeof creepData["iceCreamG"] === "number" &&
+    typeof creepData["iceCreamB"] === "number"
+  ) {
+    const newCreepColor = Color(1, 1, 1);
+    newCreepColor.SetColorize(
+      creepData["iceCreamR"] * 4,
+      creepData["iceCreamG"] * 4,
+      creepData["iceCreamB"] * 4,
+      1,
+    );
+    const creepSprite = effect.GetSprite();
+    creepSprite.Color = newCreepColor;
   }
 }
