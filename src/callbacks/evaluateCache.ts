@@ -1,5 +1,6 @@
 import { CacheFlag, ModCallback } from "isaac-typescript-definitions";
 import { CollectibleTypeCustom } from "../enums/CollectibleTypeCustom";
+import * as bobsTea from "../items/bobsTea";
 
 const MIN_FIRE_DELAY = 5;
 
@@ -20,15 +21,5 @@ function fireDelay(player: EntityPlayer) {
     player.MaxFireDelay -= bonus;
   }
 
-  const playerData = player.GetData();
-  if (
-    player.HasCollectible(CollectibleTypeCustom.BOBS_TEA) &&
-    playerData["currentBobsTeaBonus"] === undefined
-  ) {
-    playerData["currentBobsTeaBonus"] = 0;
-  }
-
-  if (playerData["currentBobsTeaBonus"] !== undefined) {
-    player.MaxFireDelay /= 0.8 + Number(playerData["currentBobsTeaBonus"]);
-  }
+  bobsTea.evaluateCache(player);
 }
