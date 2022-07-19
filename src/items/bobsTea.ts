@@ -4,6 +4,7 @@ import {
   TearFlag,
 } from "isaac-typescript-definitions";
 import { game, getRandomSeed, log, round } from "isaacscript-common";
+import { PlayerData } from "../classes/PlayerData";
 import { CollectibleTypeCustom } from "../enums/CollectibleTypeCustom";
 
 const MAX_BONUS = 1.5;
@@ -14,9 +15,29 @@ if (EID !== undefined) {
   EID.addCollectible(CollectibleTypeCustom.BOBS_TEA, itemDescription);
 }
 
+const v = {
+  run: {
+    playerData: new DefaultMap<PlayerIndex, PlayerData>(() => new PlayerData()),
+  },
+};
+
 // ModCallback.POST_PEFFECT_UPDATE (4)
 export function postPEffectUpdate(player: EntityPlayer): void {
   checkHasItem(player);
+}
+
+export function evaluateCache(player: EntityPlayer): void {
+  const playerData = player.GetData();
+  if (
+    player.HasCollectible(CollectibleTypeCustom.BOBS_TEA) &&
+    playerData["currentBobsTeaBonus"] === undefined
+  ) {
+    playerData["currentBobsTeaBonus"] = 0;
+  }
+
+  if (playerData["currentBobsTeaBonus"] !== undefined) {
+    player.MaxFireDelay /= 0.8 + Number(playerData["currentBobsTeaBonus"]);
+  }
 }
 
 function checkHasItem(player: EntityPlayer) {
