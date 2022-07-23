@@ -7,17 +7,16 @@ import {
   saveDataManager,
   spawnEffect,
 } from "isaacscript-common";
-import { PlayerData } from "../classes/PlayerData";
 import { TrinketTypeCustom } from "../enums/TrinketTypeCustom";
 
 const v = {
   run: {
-    playerData: new DefaultMap<PlayerIndex, PlayerData>(() => new PlayerData()),
+    milkItems: new DefaultMap<PlayerIndex, int>(0),
   },
 };
 
 export function init(): void {
-  saveDataManager("playerData", v);
+  saveDataManager("milkItems", v);
 }
 
 export function postPEffectUpdate(player: EntityPlayer): void {
@@ -26,24 +25,22 @@ export function postPEffectUpdate(player: EntityPlayer): void {
 
 export function changeMilkCounter(player: EntityPlayer, amount: int): void {
   const playerIndex = getPlayerIndex(player);
-  const data = v.run.playerData.getAndSetDefault(playerIndex);
+  let data = v.run.milkItems.getAndSetDefault(playerIndex);
 
-  data.milkCollectibles += amount;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  data += amount;
 }
 
 function checkHasTrinket(player: EntityPlayer) {
   const playerIndex = getPlayerIndex(player);
-  const data = v.run.playerData.getAndSetDefault(playerIndex);
+  const data = v.run.milkItems.getAndSetDefault(playerIndex);
 
-  if (
-    player.HasTrinket(TrinketTypeCustom.LACTOSE_INTOLERANCE) &&
-    data.milkCollectibles > 0
-  ) {
+  if (player.HasTrinket(TrinketTypeCustom.LACTOSE_INTOLERANCE) && data > 0) {
     applyEffect(player, data);
   }
 }
 
-function applyEffect(player: EntityPlayer, data: PlayerData) {
+function applyEffect(player: EntityPlayer, data: int) {
   const frameCount = game.GetFrameCount();
 
   if (frameCount % 5 === 0) {
@@ -53,7 +50,7 @@ function applyEffect(player: EntityPlayer, data: PlayerData) {
       player.Position,
     );
 
-    creep.CollisionDamage = 2.5 + 1 * data.milkCollectibles;
+    creep.CollisionDamage = 2.5 + 1 * data;
   }
 }
 

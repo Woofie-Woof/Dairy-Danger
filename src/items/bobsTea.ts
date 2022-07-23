@@ -3,8 +3,17 @@ import {
   CacheFlag,
   TearFlag,
 } from "isaac-typescript-definitions";
-import { game, getRandomSeed, log, round } from "isaacscript-common";
-import { PlayerData } from "../classes/PlayerData";
+import {
+  DefaultMap,
+  game,
+  getPlayerIndex,
+  getRandomSeed,
+  log,
+  PlayerIndex,
+  round,
+  saveDataManager,
+} from "isaacscript-common";
+import { BobsTeaData } from "../classes/BobsTeaData";
 import { CollectibleTypeCustom } from "../enums/CollectibleTypeCustom";
 
 const MAX_BONUS = 1.5;
@@ -17,9 +26,15 @@ if (EID !== undefined) {
 
 const v = {
   run: {
-    playerData: new DefaultMap<PlayerIndex, PlayerData>(() => new PlayerData()),
+    playerData: new DefaultMap<PlayerIndex, BobsTeaData>(
+      () => new BobsTeaData(),
+    ),
   },
 };
+
+export function init(): void {
+  saveDataManager("bobsTea", v);
+}
 
 // ModCallback.POST_PEFFECT_UPDATE (4)
 export function postPEffectUpdate(player: EntityPlayer): void {
@@ -27,17 +42,10 @@ export function postPEffectUpdate(player: EntityPlayer): void {
 }
 
 export function evaluateCache(player: EntityPlayer): void {
-  const playerData = player.GetData();
-  if (
-    player.HasCollectible(CollectibleTypeCustom.BOBS_TEA) &&
-    playerData["currentBobsTeaBonus"] === undefined
-  ) {
-    playerData["currentBobsTeaBonus"] = 0;
-  }
+  const playerIndex = getPlayerIndex(player);
+  const playerData = v.run.playerData.getAndSetDefault(playerIndex);
 
-  if (playerData["currentBobsTeaBonus"] !== undefined) {
-    player.MaxFireDelay /= 0.8 + Number(playerData["currentBobsTeaBonus"]);
-  }
+  player.MaxFireDelay /= 0.8 + Number(playerData.currentBobsTeaBonus);
 }
 
 function checkHasItem(player: EntityPlayer) {
@@ -47,57 +55,52 @@ function checkHasItem(player: EntityPlayer) {
 }
 
 function applyEffect(player: EntityPlayer) {
-  const playerData = player.GetData();
+  const playerIndex = getPlayerIndex(player);
+  const playerData = v.run.playerData.getAndSetDefault(playerIndex);
   const frameCount = game.GetFrameCount();
 
-  if (playerData["currentBobsTeaBonus"] === undefined) {
-    playerData["currentBobsTeaBonus"] = 0;
-  }
-
-  playerData["currentStartDirection"] = -1;
   if (
     Input.IsActionTriggered(ButtonAction.SHOOT_DOWN, player.ControllerIndex)
   ) {
-    playerData["currentStartDirection"] = ButtonAction.SHOOT_DOWN;
+    playerData.currentStartDirection = ButtonAction.SHOOT_DOWN;
   }
 
   if (Input.IsActionTriggered(ButtonAction.SHOOT_UP, player.ControllerIndex)) {
-    playerData["currentStartDirection"] = ButtonAction.SHOOT_UP;
+    playerData.currentStartDirection = ButtonAction.SHOOT_UP;
   }
 
   if (
     Input.IsActionTriggered(ButtonAction.SHOOT_LEFT, player.ControllerIndex)
   ) {
-    playerData["currentStartDirection"] = ButtonAction.SHOOT_LEFT;
+    playerData.currentStartDirection = ButtonAction.SHOOT_LEFT;
   }
 
   if (
     Input.IsActionTriggered(ButtonAction.SHOOT_RIGHT, player.ControllerIndex)
   ) {
-    playerData["currentStartDirection"] = ButtonAction.SHOOT_RIGHT;
+    playerData.currentStartDirection = ButtonAction.SHOOT_RIGHT;
   }
 
-  if (playerData["currentStartDirection"] !== -1) {
+  if (playerData.currentStartDirection !== -1) {
     if (
-      Number(playerData["currentBobsTeaBonus"]) === MAX_BONUS &&
-      playerData["currentStartDirection"] ===
-        playerData["lastStartDirection"] &&
-      frameCount - Number(playerData["lastStartPress"]) <= 20
+      Number(playerData.currentBobsTeaBonus) === MAX_BONUS &&
+      playerData.currentStartDirection === playerData.lastStartDirection &&
+      frameCount - Number(playerData.lastStartPress) <= 20
     ) {
       fireIpecacTears(player, playerData);
 
-      playerData["currentBobsTeaBonus"] = 0;
+      playerData.currentBobsTeaBonus = 0;
       player.AddCacheFlags(CacheFlag.FIRE_DELAY);
       player.EvaluateItems();
     }
 
-    if (playerData["currentBobsTeaBonus"] === 0) {
-      playerData["startShoot"] = frameCount;
+    if (playerData.currentBobsTeaBonus === 0) {
+      playerData.startShoot = frameCount;
     }
 
-    playerData["lastStartPress"] = frameCount;
-    playerData["lastShootFrame"] = frameCount;
-    playerData["lastStartDirection"] = playerData["currentStartDirection"];
+    playerData.lastStartPress = frameCount;
+    playerData.lastShootFrame = frameCount;
+    playerData.lastStartDirection = playerData.currentStartDirection;
   }
 
   if (
@@ -106,39 +109,31 @@ function applyEffect(player: EntityPlayer) {
     Input.IsActionPressed(ButtonAction.SHOOT_LEFT, player.ControllerIndex) ||
     Input.IsActionPressed(ButtonAction.SHOOT_RIGHT, player.ControllerIndex)
   ) {
-    playerData["lastShootFrame"] = frameCount;
+    playerData.lastShootFrame = frameCount;
   }
 
-  if (
-    playerData["startShoot"] !== undefined &&
-    playerData["lastShootFrame"] !== undefined
-  ) {
-    if (frameCount - Number(playerData["lastShootFrame"]) >= 30) {
-      playerData["currentBobsTeaBonus"] = 0;
-      playerData["startShoot"] = frameCount;
+  if (frameCount - Number(playerData.lastShootFrame) >= 30) {
+    playerData.currentBobsTeaBonus = 0;
+    playerData.startShoot = frameCount;
+    player.AddCacheFlags(CacheFlag.FIRE_DELAY);
+    player.EvaluateItems();
+  } else if (Number(playerData.currentBobsTeaBonus) < MAX_BONUS) {
+    const previousBonus = playerData.currentBobsTeaBonus;
+    playerData.currentBobsTeaBonus =
+      round(((frameCount - Number(playerData.startShoot)) / 90) * 2) / 2;
+
+    if (previousBonus !== playerData.currentBobsTeaBonus) {
+      log(`Current bonus: ${playerData.currentBobsTeaBonus}`);
       player.AddCacheFlags(CacheFlag.FIRE_DELAY);
       player.EvaluateItems();
-    } else if (Number(playerData["currentBobsTeaBonus"]) < MAX_BONUS) {
-      const previousBonus = playerData["currentBobsTeaBonus"];
-      playerData["currentBobsTeaBonus"] =
-        round(((frameCount - Number(playerData["startShoot"])) / 90) * 2) / 2;
-
-      if (previousBonus !== playerData["currentBobsTeaBonus"]) {
-        log(`Current bonus: ${playerData["currentBobsTeaBonus"]}`);
-        player.AddCacheFlags(CacheFlag.FIRE_DELAY);
-        player.EvaluateItems();
-      }
     }
   }
 }
 
-function fireIpecacTears(
-  player: EntityPlayer,
-  playerData: Record<string, unknown>,
-) {
+function fireIpecacTears(player: EntityPlayer, playerData: BobsTeaData) {
   let x = 0;
   let y = 0;
-  switch (playerData["currentStartDirection"]) {
+  switch (playerData.currentStartDirection) {
     case ButtonAction.SHOOT_DOWN:
       y = 10 * player.ShotSpeed;
       break;

@@ -14,6 +14,8 @@ import * as postTearInitLate from "./callbacks/postTearInitLate";
 import * as prePickupCollision from "./callbacks/prePickupCollision";
 import * as preTearCollision from "./callbacks/preTearCollision";
 import { MOD_NAME } from "./constants";
+import * as bobsTea from "./items/bobsTea";
+import * as droppedIceCream from "./items/droppedIceCream";
 import * as lactoseIntolerance from "./trinkets/lactoseIntolerance";
 
 main();
@@ -49,4 +51,6 @@ function registerCustomCallbacks(mod: ModUpgraded) {
 
 function initSaveDataManager() {
   lactoseIntolerance.init();
+  bobsTea.init();
+  droppedIceCream.init();
 }
